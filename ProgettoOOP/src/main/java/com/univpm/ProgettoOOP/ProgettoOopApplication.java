@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * Avvio dell'applicazione SpringBoot
  * @author Ricciardi Nicola
- * @author Rendina Michele
+ * @author Rendina Michele Pio
  */
 @SpringBootApplication
 public class ProgettoOopApplication
