@@ -1,5 +1,5 @@
-# Programmazione-Ad-Oggetti
-Progetto OOP
+# Applicazione SpringBoot Twitter OOP
+Progettazione di un'applicazioone SpringBoot per l'analisi su tweet italiani e tedeschi.
 
 
 # UML
