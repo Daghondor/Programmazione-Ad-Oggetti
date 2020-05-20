@@ -1,4 +1,5 @@
 # Programmazione-Ad-Oggetti
 Progetto OOP
 
-https://github.com/Nicola-Ricciardi/Programmazione-Ad-Oggetti/issues/1#issue-621740326
+![Untitled Diagram](https://user-images.githubusercontent.com/48152637/82448404-f643a400-9aa9-11ea-950f-5757b42b68d6.png)
+
