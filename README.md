@@ -1,4 +1,4 @@
 # Programmazione-Ad-Oggetti
 Progetto OOP
 
-![alt text](C:\Users\Ricciardi Nicola\Downloads)
+https://github.com/Nicola-Ricciardi/Programmazione-Ad-Oggetti/issues/1#issue-621740326
