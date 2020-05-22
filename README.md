@@ -9,7 +9,7 @@ Progettazione di un'applicazioone SpringBoot per l'analisi su tweet italiani e t
 
 ## Diagramma Delle Classi
 ![DIagramma Delle Classi](https://user-images.githubusercontent.com/48152637/82680106-1ca14500-9c4c-11ea-8052-4f8a09e80a8c.png)
-
+------------------------------------------------------------------------------------------------------------------------------------
 ![DIagramma Delle Classi (1)](https://user-images.githubusercontent.com/48152637/82680242-46f30280-9c4c-11ea-9742-efe4bde6af9f.png)
 
 ![DIagramma Delle Classi (2)](https://user-images.githubusercontent.com/48152637/82680263-51150100-9c4c-11ea-83f2-d368e24dcab7.png)
