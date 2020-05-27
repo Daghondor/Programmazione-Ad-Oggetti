@@ -6,6 +6,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Iterator;
+
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
@@ -38,7 +41,10 @@ public class DownloadTweet
 			 {
 			   in.close();
 			 }
-			JSONObject obj = (JSONObject) JSONValue.parseWithException(data);		
+			JSONObject obj = (JSONObject) JSONValue.parseWithException(data);	
+			System.out.println(obj);
+			System.out.println(obj.keySet());
+			System.out.println(obj.get("statuses"));
 			return (JSONObject) obj;
 		}
 		catch (IOException | ParseException e)
