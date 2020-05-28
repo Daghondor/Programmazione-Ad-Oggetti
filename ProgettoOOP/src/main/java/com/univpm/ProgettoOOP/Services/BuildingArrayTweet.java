@@ -1,7 +1,6 @@
 package com.univpm.ProgettoOOP.Services;
 
-
-import java.util.HashMap;
+import java.util.ArrayList;
 import org.json.simple.JSONObject;
 import com.univpm.ProgettoOOP.Model.Tweet;
 
@@ -12,16 +11,5 @@ import com.univpm.ProgettoOOP.Model.Tweet;
  */
 public class BuildingArrayTweet 
 {
-	private static HashMap<Integer, Tweet> arrayLista = new HashMap<Integer, Tweet>();
-	
-	public static HashMap<Integer, Tweet> getArray(JSONObject obj)
-	{
-        
-		/*for (iterable_type iterable_element : iterable) 
-		{
-			
-		}
-		arrayLista.put(c, Tweeet);*/
-		return null;
-	}
+	private static ArrayList<Tweet> arrayLista = new ArrayList<Tweet>();
 }

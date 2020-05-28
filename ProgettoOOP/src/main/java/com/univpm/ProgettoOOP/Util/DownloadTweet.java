@@ -17,6 +17,11 @@ import org.json.simple.parser.ParseException;
 
 public class DownloadTweet 
 {
+	/**
+	 * Metodo statica che preleva il tweet dalle api, successivamente
+	 * effettua l'estrapolazione dei soli parametri che ci servono per creare il nostro oggetto
+	 * Twett, e passa questi datti alla classe che si occupa della creazione di questi oggetti.
+	 */
 	public static JSONObject getTweet()
 	{
 		String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/search/tweets.json?q=spaceX&count=2";
@@ -53,15 +58,19 @@ public class DownloadTweet
 			 JSONObject obj = (JSONObject) JSONValue.parseWithException(data);
 			 JSONArray objArray = (JSONArray) obj.get("statuses");
 			 
+			 
 			 for(Object o: objArray)
 			 {
 					if (o instanceof JSONObject)
 					{
 				    	JSONObject o1 = (JSONObject)o; 
-				    	System.out.println(o1.get("created_at"));
-				    	//String name = (String)o1.get("created_at");
-				    	//String urlD = (String)o1.get("url");
-
+				    	String DataCreazione = (String) o1.get("created_at");
+				    	String TestoTweet = (String) o1.get("text");
+				    	String ID_Tweet = (String) o1.get("id_str");
+				    	String LinguaTweet = (String) o1.get("lang");
+				    	String PosizioneTweet = (String) o1.get("place");
+				    	String NomeUtente = (String) o1.get("lang");
+				    	String ID_Utente = (String) o1.get("name");	
 				 	}
 			 }
 			 
