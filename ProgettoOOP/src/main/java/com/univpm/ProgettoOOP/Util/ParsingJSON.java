@@ -14,10 +14,6 @@ public class ParsingJSON
 {
 	public static String ParsingToJSON(ArrayList<Tweet> array)
 	{
-		/*GsonBuilder mapp = new GsonBuilder();
-		Gson mapp2 = mapp.create();
-		String obj = mapp2.toJson(array);*/
-		
 		Gson out = new GsonBuilder().setPrettyPrinting().create();
 		String outFinal = out.toJson(array);
 		return outFinal;

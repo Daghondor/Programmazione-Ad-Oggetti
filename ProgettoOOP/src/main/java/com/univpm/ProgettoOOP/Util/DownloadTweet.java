@@ -14,9 +14,14 @@ import org.json.simple.parser.ParseException;
 import com.univpm.ProgettoOOP.Model.Tweet;
 import com.univpm.ProgettoOOP.Services.BuildingArrayTweet;
 
-
+/**
+ * Classe per il download dei tweet.
+ * @author Ricciardi Nicola
+ * @author Rendina Michele Pio
+ */
 public class DownloadTweet 
 {
+	static String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/search/tweets.json?q=conte&count=5000";
 	/**
 	 * Metodo statica che preleva il tweet dalle api, successivamente
 	 * effettua l'estrapolazione dei soli parametri che ci servono per creare il nostro oggetto
@@ -24,9 +29,6 @@ public class DownloadTweet
 	 */
 	public static JSONArray getTweet()
 	{
-	
-		String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/search/tweets.json?q=spaceX&count=2";
-		
 		try 
 		{
 			 URLConnection openConnection = new URL(url).openConnection();
@@ -64,15 +66,25 @@ public class DownloadTweet
 					if (o instanceof JSONObject)
 					{
 				    	JSONObject o1 = (JSONObject)o; 
-				    	String DataCreazione = (String) o1.get("created_at");
-				    	String TestoTweet = (String) o1.get("text");
-				    	String ID_Tweet = (String) o1.get("id_str");
-				    	String LinguaTweet = (String) o1.get("lang");
-				    	String PosizioneTweet = (String) o1.get("place");
+				    	try
+				    	{
+					    	String DataCreazione = (String) o1.get("created_at");
+					    	String TestoTweet = (String) o1.get("text");
+					    	String ID_Tweet = (String) o1.get("id_str");
+					    	String LinguaTweet = (String) o1.get("lang");
+					    	String PosizioneTweet = (String) o1.get("place");
+					    	// alle volte da eccezzione sul place
+					    	// java.lang.ClassCastException: org.json.simple.JSONObject cannot be cast to java.lang.String
+				    		array = BuildingArrayTweet.Building(ID_Tweet,DataCreazione,
+									TestoTweet,LinguaTweet,
+									PosizioneTweet);
+				    	}
+				    	catch(Exception e)
+				    	{
+				    		System.out.println("ERRORE: " + e.getMessage() + e.getCause());
+				    	}
 				    	
-				    	array = BuildingArrayTweet.Building(ID_Tweet,DataCreazione,
-				    										TestoTweet,LinguaTweet,
-				    										PosizioneTweet);
+				    	
 				    	
 				    	//String NomeUtente = (String) o1.get("lang");
 				    	//String ID_Utente = (String) o1.get("name");	
