@@ -1,10 +1,8 @@
 package com.univpm.ProgettoOOP.Controller;
 
-import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.univpm.ProgettoOOP.Services.BuildingArrayTweet;
 import com.univpm.ProgettoOOP.Util.*;
 
 /**
@@ -20,9 +18,8 @@ public class Controller
 	 * @return JSONObject Ritornano i tweet in formato JSON.
 	 */
 	@GetMapping("/getData")
-	public JSONObject getTweet()
+	public JSONArray getTweet()
 	{
 		return DownloadTweet.getTweet();
-		//return (JSONObject) BuildingArrayTweet.getArray(DownloadTweet.getTweet());
 	}
 }

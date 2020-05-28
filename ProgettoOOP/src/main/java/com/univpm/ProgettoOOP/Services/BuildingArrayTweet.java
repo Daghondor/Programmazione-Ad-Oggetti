@@ -1,7 +1,6 @@
 package com.univpm.ProgettoOOP.Services;
 
 import java.util.ArrayList;
-import org.json.simple.JSONObject;
 import com.univpm.ProgettoOOP.Model.Tweet;
 
 /**
@@ -12,4 +11,11 @@ import com.univpm.ProgettoOOP.Model.Tweet;
 public class BuildingArrayTweet 
 {
 	private static ArrayList<Tweet> arrayLista = new ArrayList<Tweet>();
+	
+	public static ArrayList<Tweet> Building(String id_tweet, String dataCreazione, String testo, String lingua, String locazione)
+	{
+		Tweet singoloTweet = new Tweet(id_tweet, dataCreazione, testo, lingua, locazione);
+		arrayLista.add(singoloTweet);
+		return arrayLista;
+	}
 }

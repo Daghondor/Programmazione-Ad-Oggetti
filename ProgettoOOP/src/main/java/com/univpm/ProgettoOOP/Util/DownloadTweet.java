@@ -1,18 +1,18 @@
 package com.univpm.ProgettoOOP.Util;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
+import com.univpm.ProgettoOOP.Model.Tweet;
+import com.univpm.ProgettoOOP.Services.BuildingArrayTweet;
 
 
 public class DownloadTweet 
@@ -22,8 +22,9 @@ public class DownloadTweet
 	 * effettua l'estrapolazione dei soli parametri che ci servono per creare il nostro oggetto
 	 * Twett, e passa questi datti alla classe che si occupa della creazione di questi oggetti.
 	 */
-	public static JSONObject getTweet()
+	public static JSONArray getTweet()
 	{
+	
 		String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/search/tweets.json?q=spaceX&count=2";
 		
 		try 
@@ -53,11 +54,10 @@ public class DownloadTweet
 			 {
 				 in.close();
 			 }
-			 System.out.println(data);
 			
 			 JSONObject obj = (JSONObject) JSONValue.parseWithException(data);
 			 JSONArray objArray = (JSONArray) obj.get("statuses");
-			 
+			 ArrayList<Tweet> array = new ArrayList<Tweet>();
 			 
 			 for(Object o: objArray)
 			 {
@@ -69,12 +69,17 @@ public class DownloadTweet
 				    	String ID_Tweet = (String) o1.get("id_str");
 				    	String LinguaTweet = (String) o1.get("lang");
 				    	String PosizioneTweet = (String) o1.get("place");
-				    	String NomeUtente = (String) o1.get("lang");
-				    	String ID_Utente = (String) o1.get("name");	
+				    	
+				    	array = BuildingArrayTweet.Building(ID_Tweet,DataCreazione,
+				    										TestoTweet,LinguaTweet,
+				    										PosizioneTweet);
+				    	
+				    	//String NomeUtente = (String) o1.get("lang");
+				    	//String ID_Utente = (String) o1.get("name");	
 				 	}
 			 }
+			 return (JSONArray) JSONValue.parseWithException(ParsingJSON.ParsingToJSON(array));
 			 
-			 return (JSONObject) obj;
 		}
 		catch (IOException | ParseException e)
 		{
