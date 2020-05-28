@@ -1,13 +1,14 @@
 package com.univpm.ProgettoOOP.Util;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Iterator;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -19,6 +20,7 @@ public class DownloadTweet
 	public static JSONObject getTweet()
 	{
 		String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/search/tweets.json?q=spaceX&count=2";
+		
 		try 
 		{
 			 URLConnection openConnection = new URL(url).openConnection();
@@ -29,23 +31,41 @@ public class DownloadTweet
 			 String line = "";
 			 try 
 			 {
-			   InputStreamReader inR = new InputStreamReader( in );
-			   BufferedReader buf = new BufferedReader( inR );
+				 InputStreamReader inR = new InputStreamReader( in );
+				 BufferedReader buf = new BufferedReader( inR );
 			  
-			   while ( ( line = buf.readLine() ) != null ) 
-			   {
-				   data+= line;
-			   }
+				 while ( ( line = buf.readLine() ) != null ) 
+				 {
+					 data+= line;
+				 }
 			 } 
+			 catch (IOException e) 
+			 {
+				 System.out.println(e.getCause());
+				 System.out.println("ERRORE I/O. OPERAZIONE INTERROTTA.");
+			 }
 			 finally
 			 {
-			   in.close();
+				 in.close();
 			 }
-			JSONObject obj = (JSONObject) JSONValue.parseWithException(data);	
-			System.out.println(obj);
-			System.out.println(obj.keySet());
-			System.out.println(obj.get("statuses"));
-			return (JSONObject) obj;
+			 System.out.println(data);
+			
+			 JSONObject obj = (JSONObject) JSONValue.parseWithException(data);
+			 JSONArray objArray = (JSONArray) obj.get("statuses");
+			 
+			 for(Object o: objArray)
+			 {
+					if (o instanceof JSONObject)
+					{
+				    	JSONObject o1 = (JSONObject)o; 
+				    	System.out.println(o1.get("created_at"));
+				    	//String name = (String)o1.get("created_at");
+				    	//String urlD = (String)o1.get("url");
+
+				 	}
+			 }
+			 
+			 return (JSONObject) obj;
 		}
 		catch (IOException | ParseException e)
 		{
