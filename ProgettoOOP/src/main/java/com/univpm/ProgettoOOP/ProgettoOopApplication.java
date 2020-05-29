@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Avvio dell'applicazione SpringBoot
+ * Classe che si occupa di gestire ed avviare tutti i componenti dell'applicazione.
  * @author Ricciardi Nicola
  * @author Rendina Michele Pio
  */

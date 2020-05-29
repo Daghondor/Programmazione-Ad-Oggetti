@@ -1,4 +1,4 @@
-package com.univpm.ProgettoOOP.Util;
+package com.univpm.ProgettoOOP.Services;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 import com.univpm.ProgettoOOP.Model.Tweet;
-import com.univpm.ProgettoOOP.Services.BuildingArrayTweet;
+import com.univpm.ProgettoOOP.Util.ParsingJSON;
 
 /**
  * Classe per il download dei tweet.
@@ -21,13 +21,13 @@ import com.univpm.ProgettoOOP.Services.BuildingArrayTweet;
  */
 public class DownloadTweet 
 {
-	static String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/search/tweets.json?q=conte&count=5000";
 	/**
-	 * Metodo statica che preleva il tweet dalle api, successivamente
+	 * Metodo statico che preleva i tweet dall'URL passato dal controller, successivamente
 	 * effettua l'estrapolazione dei soli parametri che ci servono per creare il nostro oggetto
 	 * Twett, e passa questi datti alla classe che si occupa della creazione di questi oggetti.
+	 * @return listaDeiTweet Ritorna al controller la lista dei tweet modellati.
 	 */
-	public static JSONArray getTweet()
+	public static JSONArray getTweet(String url)
 	{
 		try 
 		{
@@ -39,18 +39,19 @@ public class DownloadTweet
 			 String line = "";
 			 try 
 			 {
-				 InputStreamReader inR = new InputStreamReader( in );
-				 BufferedReader buf = new BufferedReader( inR );
+				 InputStreamReader inR = new InputStreamReader(in);
+				 BufferedReader buf = new BufferedReader(inR);
 			  
-				 while ( ( line = buf.readLine() ) != null ) 
+				 while ((line = buf.readLine()) != null) 
 				 {
-					 data+= line;
+					 data += line;
 				 }
 			 } 
 			 catch (IOException e) 
 			 {
-				 System.out.println(e.getCause());
-				 System.out.println("ERRORE I/O. OPERAZIONE INTERROTTA.");
+		    		System.out.println("ERRORE. OPERAZIONE I/O INTERROTTA.");
+		    		System.out.println("MESSAGGIO: " + e.getMessage());
+		    		System.out.println("CAUSA: " + e.getCause());
 			 }
 			 finally
 			 {
@@ -65,7 +66,7 @@ public class DownloadTweet
 			 {
 					if (o instanceof JSONObject)
 					{
-				    	JSONObject o1 = (JSONObject)o; 
+				    	JSONObject o1 = (JSONObject) o; 
 				    	try
 				    	{
 					    	String DataCreazione = (String) o1.get("created_at");
@@ -73,15 +74,17 @@ public class DownloadTweet
 					    	String ID_Tweet = (String) o1.get("id_str");
 					    	String LinguaTweet = (String) o1.get("lang");
 					    	String PosizioneTweet = (String) o1.get("place");
-					    	// alle volte da eccezzione sul place
-					    	// java.lang.ClassCastException: org.json.simple.JSONObject cannot be cast to java.lang.String
+					    	if(PosizioneTweet == null) PosizioneTweet = "Not Aviable";
 				    		array = BuildingArrayTweet.Building(ID_Tweet,DataCreazione,
-									TestoTweet,LinguaTweet,
-									PosizioneTweet);
+																TestoTweet,LinguaTweet,
+																PosizioneTweet);
 				    	}
 				    	catch(Exception e)
 				    	{
-				    		System.out.println("ERRORE: " + e.getMessage() + e.getCause());
+				    		System.out.println("ERRORE. OPERAZIONE INTERROTTA NEL PRELEVAGGIO DEI PARAMETRI.");
+				    		System.out.println("MESSAGGIO: " + e.getMessage());
+				    		System.out.println("CAUSA: " + e.getCause());
+
 				    	}
 				    	
 				    	
@@ -90,17 +93,25 @@ public class DownloadTweet
 				    	//String ID_Utente = (String) o1.get("name");	
 				 	}
 			 }
-			 return (JSONArray) JSONValue.parseWithException(ParsingJSON.ParsingToJSON(array));
+			 
+			 JSONArray listaDeiTweet = new JSONArray();
+			 listaDeiTweet = (JSONArray) JSONValue.parseWithException(ParsingJSON.ParsingToJSON(array));
+			 return listaDeiTweet;
 			 
 		}
 		catch (IOException | ParseException e)
 		{
-			e.printStackTrace();
+    		System.out.println("ERRORE. OPERAZIONE I/O - PARSING INTERROTTA .");
+    		System.out.println("MESSAGGIO: " + e.getMessage());
+    		System.out.println("CAUSA: " + e.getCause());
 		} 
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+    		System.out.println("ERRORE GENERICO.");
+    		System.out.println("MESSAGGIO: " + e.getMessage());
+    		System.out.println("CAUSA: " + e.getCause());
 		}
+		
 		return null;
 	}
 }
