@@ -97,6 +97,12 @@ public class DownloadTweet
 			 
 			 JSONArray listaDeiTweet = new JSONArray();
 			 listaDeiTweet = (JSONArray) JSONValue.parseWithException(ParsingJSON.ParsingToJSON(array));
+			 /*
+			  * Inserisco il metodo .clear() dell'arrayList poiché se non viene inserito 
+			  * vi è presente un bug in cui sono presenti sia i tweet della ricerca nuova,
+			  * sia i tweet della ricerca vecchia.
+			  */
+			 array.clear();
 			 return listaDeiTweet;
 			 
 		}

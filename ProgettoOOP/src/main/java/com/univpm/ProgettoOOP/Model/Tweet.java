@@ -1,7 +1,7 @@
 package com.univpm.ProgettoOOP.Model;
 
-/** Rappresenta la classe che modella un tweet
- * permesse al Client.
+/** 
+ * Rappresenta la classe che modella un tweet.
  * @author Ricciardi Nicola
  * @author Rendina Michele Pio
 */
@@ -40,7 +40,6 @@ public class Tweet
 	protected String ID_Utente;
 	
 	
-	
 	/**
 	 * Costruttore della classe Tweet che inizializza una istanza.
 	 * @param data Data di creazione del tweet.
@@ -49,17 +48,15 @@ public class Tweet
 	 * @param lang Lingua del tweet.
 	 * @param location Locazione del tweet.
 	 */
-	
-	public Tweet(String data, String iD_Tweet, String text, String lang, String location) 
+	public Tweet(String iD_Tweet, String data, String text, String lang, String location) 
 	{
 		super(); // Richiamo del costruttore della classe superiore java.util
-		Data = data;
 		ID_Tweet = iD_Tweet;
+		Data = data;
 		Text = text;
 		Lang = lang;
 		Location = location;
 	}
-	
 	/*public Tweet(String data, String iD_Tweet, String text, String lang, String location, String iD_Utente, String nome_Utente) 
 	{
 		super(); // Richiamo del costruttore della classe superiore java.util
