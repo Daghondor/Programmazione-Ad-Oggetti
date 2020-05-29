@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 import com.univpm.ProgettoOOP.Model.Tweet;
+import com.univpm.ProgettoOOP.Util.CountTweet;
 import com.univpm.ProgettoOOP.Util.ParsingJSON;
 
 /**
@@ -76,6 +77,7 @@ public class DownloadTweet
 					    	String LinguaTweet = (String) o1.get("lang");
 					    	String PosizioneTweet = (String) o1.get("place");
 					    	if(PosizioneTweet == null) PosizioneTweet = "Not Aviable";
+					    	
 				    		array = BuildingArrayTweet.Building(ID_Tweet,DataCreazione,
 																TestoTweet,LinguaTweet,
 																PosizioneTweet);
@@ -87,9 +89,6 @@ public class DownloadTweet
 				    		System.out.println("CAUSA: " + e.getCause());
 
 				    	}
-				    	
-				    	
-				    	
 				    	//String NomeUtente = (String) o1.get("lang");
 				    	//String ID_Utente = (String) o1.get("name");	
 				 	}
@@ -103,7 +102,8 @@ public class DownloadTweet
 			  * sia i tweet della ricerca vecchia.
 			  */
 			 array.clear();
-			 return listaDeiTweet;
+			 return CountTweet.count(listaDeiTweet);
+			 //return listaDeiTweet;
 			 
 		}
 		catch (IOException | ParseException e)
@@ -121,4 +121,7 @@ public class DownloadTweet
 		
 		return null;
 	}
+	
+	
+	
 }
