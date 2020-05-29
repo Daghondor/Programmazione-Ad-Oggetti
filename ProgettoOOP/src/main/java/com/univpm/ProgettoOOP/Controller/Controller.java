@@ -2,7 +2,6 @@ package com.univpm.ProgettoOOP.Controller;
 
 import org.json.simple.JSONArray;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.univpm.ProgettoOOP.Services.*;
 
@@ -25,23 +24,30 @@ public class Controller
 	private static String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/search/tweets.json?q=Coronavirus&count=100&result_type=mixed&since_id=12345";
 	
 	/**
-	 * Rotta che preleva i tweet.
-	 * @return arrayTweetGenerici Ritornano i tweet generici modellati in formato JSONArray.
+	 * Rotta che preleva i tweet, e ne effettua l'analisi sulla lingua.
+	 * @return arrayTweetLingua Ritornano i tweet analizzati sulla lingua modellati in formato JSONArray.
 	 */
-	@GetMapping("/getData")
-	public JSONArray getTweet()
+	@GetMapping("/getDataLanguage")
+	public JSONArray getTweetLingua()
 	{
-		JSONArray arrayTweetGenerici = new JSONArray();
-		arrayTweetGenerici = DownloadTweet.getTweet(url);
-		return arrayTweetGenerici;
+		JSONArray arrayTweetLingua = new JSONArray();
+		arrayTweetLingua = DownloadTweet.getTweet(url, "lingua");
+		return arrayTweetLingua;
 	}
 	
-
 	/**
-	 * Rotta che preleva i tweet con il filtro sulla lingua passato dall'utente.
-	 * @param Lang Lingua prelevata dall'url.
-	 * @return arrayTweetLinguaIT Ritornano i tweet filtrati sulla lingua.
+	 * Rotta che preleva i tweet, e ne effettua l'analisi sulla locazione.
+	 * @return arrayTweetLocation Ritornano i tweet analizzati sulla locazione modellati in formato JSONArray.
 	 */
+	@GetMapping("/getDataLocation")
+	public JSONArray getTweetLocation()
+	{
+		JSONArray arrayTweetLocation= new JSONArray();
+		arrayTweetLocation = DownloadTweet.getTweet(url, "location");
+		return arrayTweetLocation;
+	}
+	
+	/*
 	@GetMapping("/getDataParam")
 	public JSONArray getTweetWithParam(@RequestParam(name = "lang", defaultValue = "en") String Lang)
 	{
@@ -53,10 +59,11 @@ public class Controller
 		else
 		{
 			return null;
-		}*/
+		}
 		String parametroLang = "&lang=" + Lang;
 		JSONArray arrayTweetLinguaIT = new JSONArray();
 		arrayTweetLinguaIT = DownloadTweet.getTweet(url.substring(0, url.length()) + parametroLang);
 		return arrayTweetLinguaIT;
 	}
+*/
 }

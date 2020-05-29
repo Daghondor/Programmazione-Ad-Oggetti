@@ -48,26 +48,17 @@ public class Tweet
 	 * @param lang Lingua del tweet.
 	 * @param location Locazione del tweet.
 	 */
-	public Tweet(String iD_Tweet, String data, String text, String lang, String location) 
+	public Tweet(String iD_Tweet, String data, String text, String lang, String location, String nome_Utente, String iD_Utente) 
 	{
 		super(); // Richiamo del costruttore della classe superiore java.util
 		ID_Tweet = iD_Tweet;
 		Data = data;
-		Text = text;
-		Lang = lang;
-		Location = location;
-	}
-	/*public Tweet(String data, String iD_Tweet, String text, String lang, String location, String iD_Utente, String nome_Utente) 
-	{
-		super(); // Richiamo del costruttore della classe superiore java.util
-		Data = data;
-		ID_Tweet = iD_Tweet;
 		Text = text;
 		Lang = lang;
 		Location = location;
 		ID_Utente = iD_Utente;
 		Nome_Utente = nome_Utente;
-	}*/
+	}
 	
 	/**
 	 * Getter della data del tweet.

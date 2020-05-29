@@ -27,9 +27,8 @@ public class DownloadTweet
 	 * effettua l'estrapolazione dei soli parametri che ci servono per creare il nostro oggetto
 	 * Twett, e passa questi datti alla classe che si occupa della creazione di questi oggetti.
 	 * @return listaDeiTweet Ritorna al controller la lista dei tweet modellati.
-	 * @throws LangException 
 	 */
-	public static JSONArray getTweet(String url)
+	public static JSONArray getTweet(String url, String tipo)
 	{
 		try 
 		{
@@ -63,12 +62,14 @@ public class DownloadTweet
 			 JSONObject obj = (JSONObject) JSONValue.parseWithException(data);
 			 JSONArray objArray = (JSONArray) obj.get("statuses");
 			 ArrayList<Tweet> array = new ArrayList<Tweet>();
+
 			 
 			 for(Object o: objArray)
 			 {
 					if (o instanceof JSONObject)
 					{
 				    	JSONObject o1 = (JSONObject) o; 
+				    	
 				    	try
 				    	{
 					    	String DataCreazione = (String) o1.get("created_at");
@@ -76,11 +77,16 @@ public class DownloadTweet
 					    	String ID_Tweet = (String) o1.get("id_str");
 					    	String LinguaTweet = (String) o1.get("lang");
 					    	String PosizioneTweet = (String) o1.get("place");
+					    	JSONObject objUtente =  (JSONObject) o1.get("user");
+					    	String NomeUtente = (String) objUtente.get("name");
+					    	String ID_utente = (String) objUtente.get("id_str");
+
 					    	if(PosizioneTweet == null) PosizioneTweet = "Not Aviable";
 					    	
 				    		array = BuildingArrayTweet.Building(ID_Tweet,DataCreazione,
 																TestoTweet,LinguaTweet,
-																PosizioneTweet);
+																PosizioneTweet,NomeUtente,
+																ID_utente);
 				    	}
 				    	catch(Exception e)
 				    	{
@@ -88,23 +94,22 @@ public class DownloadTweet
 				    		System.out.println("MESSAGGIO: " + e.getMessage());
 				    		System.out.println("CAUSA: " + e.getCause());
 
-				    	}
-				    	//String NomeUtente = (String) o1.get("lang");
-				    	//String ID_Utente = (String) o1.get("name");	
+				    	}	
 				 	}
 			 }
 			 
 			 JSONArray listaDeiTweet = new JSONArray();
 			 listaDeiTweet = (JSONArray) JSONValue.parseWithException(ParsingJSON.ParsingToJSON(array));
-			 /*
-			  * Inserisco il metodo .clear() dell'arrayList poiché se non viene inserito 
-			  * vi è presente un bug in cui sono presenti sia i tweet della ricerca nuova,
-			  * sia i tweet della ricerca vecchia.
-			  */
 			 array.clear();
-			 return CountTweet.count(listaDeiTweet);
-			 //return listaDeiTweet;
 			 
+			 if(tipo.equals("lingua"))
+			 {
+				 return CountTweet.analisiLinguaTweet(listaDeiTweet);
+			 }
+			 else if(tipo.equals("location"))
+			 {
+				 return CountTweet.analisiLocationTweet(listaDeiTweet);
+			 }	 
 		}
 		catch (IOException | ParseException e)
 		{
@@ -121,7 +126,4 @@ public class DownloadTweet
 		
 		return null;
 	}
-	
-	
-	
 }
