@@ -39,6 +39,8 @@ public class Tweet
 	 */
 	protected String ID_Utente;
 	
+	protected String locationUtente;
+	
 	
 	/**
 	 * Costruttore della classe Tweet che inizializza una istanza.
@@ -48,7 +50,7 @@ public class Tweet
 	 * @param lang Lingua del tweet.
 	 * @param location Locazione del tweet.
 	 */
-	public Tweet(String iD_Tweet, String data, String text, String lang, String location, String nome_Utente, String iD_Utente) 
+	public Tweet(String iD_Tweet, String data, String text, String lang, String location, String nome_Utente, String iD_Utente, String locationUtente) 
 	{
 		super(); // Richiamo del costruttore della classe superiore java.util
 		ID_Tweet = iD_Tweet;
@@ -58,6 +60,7 @@ public class Tweet
 		Location = location;
 		ID_Utente = iD_Utente;
 		Nome_Utente = nome_Utente;
+		this.locationUtente = locationUtente;
 	}
 	
 	/**

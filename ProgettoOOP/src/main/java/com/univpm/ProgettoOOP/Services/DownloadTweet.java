@@ -72,21 +72,24 @@ public class DownloadTweet
 				    	
 				    	try
 				    	{
-					    	String DataCreazione = (String) o1.get("created_at");
-					    	String TestoTweet = (String) o1.get("text");
-					    	String ID_Tweet = (String) o1.get("id_str");
-					    	String LinguaTweet = (String) o1.get("lang");
-					    	String PosizioneTweet = (String) o1.get("place");
-					    	JSONObject objUtente =  (JSONObject) o1.get("user");
-					    	String NomeUtente = (String) objUtente.get("name");
-					    	String ID_utente = (String) objUtente.get("id_str");
-
-					    	if(PosizioneTweet == null) PosizioneTweet = "Not Aviable";
-					    	
-				    		array = BuildingArrayTweet.Building(ID_Tweet,DataCreazione,
-																TestoTweet,LinguaTweet,
-																PosizioneTweet,NomeUtente,
-																ID_utente);
+				    		JSONObject objUtente =  (JSONObject) o1.get("user");
+					    	String LocationUtente = (String) objUtente.get("location");
+				    		if(!LocationUtente.equals(""))
+				    		{
+				    			String DataCreazione = (String) o1.get("created_at");
+						    	String TestoTweet = (String) o1.get("text");
+						    	String ID_Tweet = (String) o1.get("id_str");
+						    	String LinguaTweet = (String) o1.get("lang");
+						    	String PosizioneTweet = (String) o1.get("place");
+						    	String NomeUtente = (String) objUtente.get("name");
+						    	String ID_utente = (String) objUtente.get("id_str");
+						    	
+						    	if(PosizioneTweet == null) PosizioneTweet = "Not Aviable";
+						    	array = BuildingArrayTweet.Building(ID_Tweet,DataCreazione,
+										TestoTweet,LinguaTweet,
+										PosizioneTweet,NomeUtente,
+										ID_utente, LocationUtente);
+				    		}		    		
 				    	}
 				    	catch(Exception e)
 				    	{
