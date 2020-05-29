@@ -1,8 +1,5 @@
 package com.univpm.ProgettoOOP.Model;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 /** Rappresenta la classe che modella un tweet
  * permesse al Client.
  * @author Ricciardi Nicola
@@ -166,39 +163,39 @@ public class Tweet
 	}
 
 	
-//	/**
-//	 * Getter del Nome dell'utente che ha creato il tweet.
-//	 * @return Nome_Utente Nome dell'utente che ha creato il tweet.
-//	 */
-//	public String getNome_Utente() 
-//	{
-//		return Nome_Utente;
-//	}
-//
-//	/**
-//	 * Setter del Nome dell'utente che ha creato il tweet.
-//	 * @param nome_Utente Nome dell'utente che ha creato il tweet passato come parametro.
-//	 */
-//	public void setNome_Utente(String nome_Utente) 
-//	{
-//		Nome_Utente = nome_Utente;
-//	}
-//
-//	/**
-//	 * Getter dell'ID dell'utente che ha creato il tweet.
-//	 * @return ID_Utente Nome dell'utente che ha creato il tweet.
-//	 */
-//	public String getID_Utente() 
-//	{
-//		return ID_Utente;
-//	}
-//
-//	/**
-//	 * Setter dell'ID dell'utente che ha creato il tweet.
-//	 * @param iD_Utente ID dell'utente che ha creato il tweet passato come parametro.
-//	 */
-//	public void setID_Utente(String iD_Utente) 
-//	{
-//		ID_Utente = iD_Utente;
-//	}
+	/**
+	 * Getter del Nome dell'utente che ha creato il tweet.
+	 * @return Nome_Utente Nome dell'utente che ha creato il tweet.
+	 */
+	public String getNome_Utente() 
+	{
+		return Nome_Utente;
+	}
+
+	/**
+	 * Setter del Nome dell'utente che ha creato il tweet.
+	 * @param nome_Utente Nome dell'utente che ha creato il tweet passato come parametro.
+	 */
+	public void setNome_Utente(String nome_Utente) 
+	{
+		Nome_Utente = nome_Utente;
+	}
+
+	/**
+	 * Getter dell'ID dell'utente che ha creato il tweet.
+	 * @return ID_Utente Nome dell'utente che ha creato il tweet.
+	 */
+	public String getID_Utente() 
+	{
+		return ID_Utente;
+	}
+
+	/**
+	 * Setter dell'ID dell'utente che ha creato il tweet.
+	 * @param iD_Utente ID dell'utente che ha creato il tweet passato come parametro.
+	 */
+	public void setID_Utente(String iD_Utente) 
+	{
+		ID_Utente = iD_Utente;
+	}
 }

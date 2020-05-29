@@ -26,6 +26,7 @@ public class DownloadTweet
 	 * effettua l'estrapolazione dei soli parametri che ci servono per creare il nostro oggetto
 	 * Twett, e passa questi datti alla classe che si occupa della creazione di questi oggetti.
 	 * @return listaDeiTweet Ritorna al controller la lista dei tweet modellati.
+	 * @throws LangException 
 	 */
 	public static JSONArray getTweet(String url)
 	{
