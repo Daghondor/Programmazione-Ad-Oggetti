@@ -22,7 +22,7 @@ public class Tweet
 	/**
 	 * Locazione del tweet.
 	 */
-	protected String Location;
+	protected String Location_Tweet;
 	
 	/**
 	 * Data creazione tweet.
@@ -39,7 +39,10 @@ public class Tweet
 	 */
 	protected String ID_Utente;
 	
-	protected String locationUtente;
+	/**
+	 * Locazione dell'utente.
+	 */
+	protected String Location_Utente;
 	
 	
 	/**
@@ -48,19 +51,22 @@ public class Tweet
 	 * @param iD_Tweet ID del tweet.
 	 * @param text Testo del tweet.
 	 * @param lang Lingua del tweet.
-	 * @param location Locazione del tweet.
+	 * @param location_Tweet Locazione del tweet.
+	 * @param nome_Utente Nome dell'utente.
+	 * @param iD_Utente ID dell'utente.
+	 * @param location_Utente Locazione dell'utente.
 	 */
-	public Tweet(String iD_Tweet, String data, String text, String lang, String location, String nome_Utente, String iD_Utente, String locationUtente) 
+	public Tweet(String iD_Tweet, String data, String text, String lang, String location_Tweet, String nome_Utente, String iD_Utente, String location_Utente) 
 	{
 		super(); // Richiamo del costruttore della classe superiore java.util
 		ID_Tweet = iD_Tweet;
 		Data = data;
 		Text = text;
 		Lang = lang;
-		Location = location;
+		Location_Tweet = location_Tweet;
 		ID_Utente = iD_Utente;
 		Nome_Utente = nome_Utente;
-		this.locationUtente = locationUtente;
+		Location_Utente = location_Utente;
 	}
 	
 	/**
@@ -139,24 +145,24 @@ public class Tweet
 	 * Getter della locazione del tweet.
 	 * @return Ritorna la locazione del tweet.
 	 */
-	public String getLocation() 
+	public String getLocation_Tweet() 
 	{
-		return Location;
+		return Location_Tweet;
 	}
 
 	/**
 	 * Setter della locazione del tweet.
 	 * @param location Locazione passata dal chiamante.
 	 */
-	public void setLocation(String location)
+	public void setLocation_Tweet(String location_Tweet)
 	{
-		Location = location;
+		Location_Tweet = location_Tweet;
 	}
 
 	
 	/**
-	 * Getter del Nome dell'utente che ha creato il tweet.
-	 * @return Nome_Utente Nome dell'utente che ha creato il tweet.
+	 * Getter del Nome dell'utente.
+	 * @return Nome_Utente Nome dell'utente.
 	 */
 	public String getNome_Utente() 
 	{
@@ -164,8 +170,8 @@ public class Tweet
 	}
 
 	/**
-	 * Setter del Nome dell'utente che ha creato il tweet.
-	 * @param nome_Utente Nome dell'utente che ha creato il tweet passato come parametro.
+	 * Setter del Nome dell'utente.
+	 * @param nome_Utente Nome dell'utente passato come parametro.
 	 */
 	public void setNome_Utente(String nome_Utente) 
 	{
@@ -173,8 +179,8 @@ public class Tweet
 	}
 
 	/**
-	 * Getter dell'ID dell'utente che ha creato il tweet.
-	 * @return ID_Utente Nome dell'utente che ha creato il tweet.
+	 * Getter dell'ID dell'utente.
+	 * @return ID_Utente Nome dell'utente.
 	 */
 	public String getID_Utente() 
 	{
@@ -182,11 +188,31 @@ public class Tweet
 	}
 
 	/**
-	 * Setter dell'ID dell'utente che ha creato il tweet.
-	 * @param iD_Utente ID dell'utente che ha creato il tweet passato come parametro.
+	 * Setter dell'ID dell'utente.
+	 * @param iD_Utente ID dell'utente passato dal chiamante.
 	 */
 	public void setID_Utente(String iD_Utente) 
 	{
 		ID_Utente = iD_Utente;
 	}
+
+	/**
+	 * Gettere della locazione dell'utente.
+	 * @return Location_Utente Locazione dell'utente.
+	 */
+	public String getLocation_Utente() 
+	{
+		return Location_Utente;
+	}
+
+	/**
+	 * Setter della locazione dell'utente.
+	 * @param location_Utente Locazione dell'utente passata dal chiamante.
+	 */
+	public void setLocation_Utente(String location_Utente)
+	{
+		Location_Utente = location_Utente;
+	}
+	
+	
 }

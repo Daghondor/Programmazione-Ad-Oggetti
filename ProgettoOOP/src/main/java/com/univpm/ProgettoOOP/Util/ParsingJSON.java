@@ -14,13 +14,13 @@ public class ParsingJSON
 {
 	/**
 	 * Metodo statico che passato l'arrayList dei tweet modellati, lo converta nel formato JSON.
-	 * @param array Lista di array contenente i tweet modellati.
+	 * @param arrayTweet Lista di array contenente i tweet modellati.
 	 * @return outFinal Contiene il nostro arrayList convertito nel formato JSON, in modo che il web server possa conprenderlo.
 	 */
-	public static String ParsingToJSON(ArrayList<Tweet> array)
+	public static String ParsingToJSON(ArrayList<Tweet> arrayTweet)
 	{
 		Gson out = new GsonBuilder().setPrettyPrinting().create();
-		String outFinal = out.toJson(array);
+		String outFinal = out.toJson(arrayTweet);
 		return outFinal;
 	}
 }

@@ -26,6 +26,8 @@ public class DownloadTweet
 	 * Metodo statico che preleva i tweet dall'URL passato dal controller, successivamente
 	 * effettua l'estrapolazione dei soli parametri che ci servono per creare il nostro oggetto
 	 * Twett, e passa questi datti alla classe che si occupa della creazione di questi oggetti.
+	 * @param url URL chelle API (proxy) di Twitter.
+	 * @param tipo Tipologia di chiamata che determina il tipo di analisi che verrà eseguita su i tweet (lingua o locazione).
 	 * @return listaDeiTweet Ritorna al controller la lista dei tweet modellati.
 	 */
 	public static JSONArray getTweet(String url, String tipo)
