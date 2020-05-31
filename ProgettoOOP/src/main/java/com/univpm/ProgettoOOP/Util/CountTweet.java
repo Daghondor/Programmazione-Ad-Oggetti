@@ -52,6 +52,7 @@ public class CountTweet
 					{
 						numeroTweetTedeschi++;
 						listaTweetLinguaTedesca.add(o1);
+						//tweetLinguaItalianaTedesca.add(o1);
 					}
 				} 
 				catch (Exception e) 
