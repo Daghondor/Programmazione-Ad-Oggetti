@@ -13,7 +13,7 @@ public class ProgettoOopApplication
 {
 	/**
 	 * Metodo main che inizializza i componenti e fa partire l'applicazione SpringBoot.
-	 * @param args
+	 * @param args Possibile argomento passato dal chiamante. 
 	 */
 	public static void main(String[] args) 
 	{

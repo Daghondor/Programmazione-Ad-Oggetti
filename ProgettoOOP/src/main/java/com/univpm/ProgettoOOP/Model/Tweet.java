@@ -71,7 +71,7 @@ public class Tweet
 	
 	/**
 	 * Getter della data del tweet.
-	 * @return Ritorna l'ID del tweet.
+	 * @return Data Ritorna l'ID del tweet.
 	 */
 	public String getData() 
 	{
@@ -80,7 +80,7 @@ public class Tweet
 
 	/**
 	 * Setter della data del tweet.
-	 * @param iD_Tweet ID passato dal chiamante. 
+	 * @param data Data passata dal chiamante. 
 	 */
 	public void setData(String data) 
 	{
@@ -89,7 +89,7 @@ public class Tweet
 
 	/**
 	 * Getter dell'ID tweet.
-	 * @return Ritorna l'ID del tweet.
+	 * @return ID_Tweet Ritorna l'ID del tweet.
 	 */
 	public String getID_Tweet() 
 	{
@@ -107,7 +107,7 @@ public class Tweet
 
 	/**
 	 * Getter del testo del  tweet.
-	 * @return Ritorna il testo del tweet.
+	 * @return Text Ritorna il testo del tweet.
 	 */
 	public String getText()
 	{
@@ -125,7 +125,7 @@ public class Tweet
 
 	/**
 	 * Getter della lingua del tweet.
-	 * @return Ritorna la lingua del tweet.
+	 * @return Lang Ritorna la lingua del tweet.
 	 */
 	public String getLang() 
 	{
@@ -143,7 +143,7 @@ public class Tweet
 
 	/**
 	 * Getter della locazione del tweet.
-	 * @return Ritorna la locazione del tweet.
+	 * @return Location_Tweet Ritorna la locazione del tweet.
 	 */
 	public String getLocation_Tweet() 
 	{
@@ -152,7 +152,7 @@ public class Tweet
 
 	/**
 	 * Setter della locazione del tweet.
-	 * @param location Locazione passata dal chiamante.
+	 * @param location_Tweet Locazione passata dal chiamante.
 	 */
 	public void setLocation_Tweet(String location_Tweet)
 	{

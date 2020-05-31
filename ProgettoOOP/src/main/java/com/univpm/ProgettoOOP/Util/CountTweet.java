@@ -46,13 +46,14 @@ public class CountTweet
 					if (((String) o1.get("Lang")).equals("it")) 
 					{
 						numeroTweetItaliani++;
-						listaTweetLinguaItaliana.add(o1);
+						tweetLinguaItalianaTedesca.add(o1);
+						//listaTweetLinguaItaliana.add(o1);
 					} 
 					else if (((String) o1.get("Lang")).equals("de")) 
 					{
 						numeroTweetTedeschi++;
-						listaTweetLinguaTedesca.add(o1);
-						//tweetLinguaItalianaTedesca.add(o1);
+						//listaTweetLinguaTedesca.add(o1);
+						tweetLinguaItalianaTedesca.add(o1);
 					}
 				} 
 				catch (Exception e) 
@@ -64,8 +65,8 @@ public class CountTweet
 				}
 			}
 		}
-		tweetLinguaItalianaTedesca.add(listaTweetLinguaItaliana);
-		tweetLinguaItalianaTedesca.add(listaTweetLinguaTedesca);
+		//tweetLinguaItalianaTedesca.add(listaTweetLinguaItaliana);
+		//tweetLinguaItalianaTedesca.add(listaTweetLinguaTedesca);
 
 	 	return tweetLinguaItalianaTedesca;
 	}

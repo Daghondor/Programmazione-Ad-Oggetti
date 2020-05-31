@@ -1,1 +1,8 @@
 com.univpm.ProgettoOOP
+com.univpm.ProgettoOOP.Controller
+com.univpm.ProgettoOOP.Exception
+com.univpm.ProgettoOOP.Filters
+com.univpm.ProgettoOOP.Model
+com.univpm.ProgettoOOP.Services
+com.univpm.ProgettoOOP.Statistics
+com.univpm.ProgettoOOP.Util
