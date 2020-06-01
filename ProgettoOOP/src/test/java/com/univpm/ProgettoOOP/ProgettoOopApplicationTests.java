@@ -40,7 +40,7 @@ public class ProgettoOopApplicationTests
 	}
 
 	/**
-	 * Serve per distruggere ciò che è stato inizializzato da setUp.
+	 * Serve per distruggere ciò che e' stato inizializzato dal setUp.
 	 * @throws Exception Possibile Eccezione.
 	 */
 	@AfterEach
@@ -73,7 +73,7 @@ public class ProgettoOopApplicationTests
 	}
 	
 	/**
-	 * Test che verifica se il vettore di tweet (in base lingua) not è null.
+	 * Test che verifica se il vettore di tweet (in base lingua) not e' null.
 	 */
 	@Test
 	@DisplayName("Test 2: Verifica se l'array contenente i tweet modellati con la lingua sia diverso da null.")
@@ -83,7 +83,7 @@ public class ProgettoOopApplicationTests
 	}
 	
 	/**
-	 * Test che verifica se il vettore di tweet (in base locazione) not è null.
+	 * Test che verifica se il vettore di tweet (in base locazione) not e' null.
 	 */
 	@Test
 	@DisplayName("Test 3: Verifica se l'array contenente i tweet modellati con la locazione sia diverso da null.")
