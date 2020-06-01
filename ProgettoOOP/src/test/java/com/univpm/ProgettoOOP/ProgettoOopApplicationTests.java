@@ -64,7 +64,7 @@ public class ProgettoOopApplicationTests
 
 				try 
 				{
-					assertTrue("Errore Lingua:"+o1.get("Lang"),o1.get("Lang").equals("it") | o1.get("Lang").equals("de"));
+					assertTrue("Errore Nella Lingua: " + o1.get("Lang"), o1.get("Lang").equals("it") | o1.get("Lang").equals("de"));
 
 				} 
 				catch (Exception e) {}
