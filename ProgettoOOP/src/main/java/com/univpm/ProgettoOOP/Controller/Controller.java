@@ -3,7 +3,6 @@ package com.univpm.ProgettoOOP.Controller;
 import org.json.simple.JSONArray;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.univpm.ProgettoOOP.Filters.FilterIT_IT;
 import com.univpm.ProgettoOOP.Services.*;
 
 /**
@@ -22,8 +21,10 @@ public class Controller
 	 * result_type = mixed: Ci restituisce i tweet sia recenti, sia popolari.
 	 * since_id = 12345: Viene inserito questo parametro per evitare la ridondanza di tweet già prelevati.
 	 */
+	//private static String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/search/tweets.json?q=Coronavirus&count=100&result_type=mixed&since_id=12345";
+	//private static String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/api/1.1/search/tweets.json?q=Coronavirus&count=100&result_type=mixed&since_id=12345";
 	private static String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/search/tweets.json?q=Coronavirus&count=100&result_type=mixed&since_id=12345";
-	
+
 	/**
 	 * Rotta che preleva i tweet, e ne effettua l'analisi sulla lingua.
 	 * @return arrayTweetLingua Ritornano i tweet analizzati sulla lingua modellati in formato JSONArray.
@@ -51,14 +52,27 @@ public class Controller
 	}
 	
 	/**
-	 * Rotta che preleva i tweet, e ne effettua l'analisi sulla locazione.
-	 * @return arrayTweetLocation Ritornano i tweet analizzati sulla locazione modellati in formato JSONArray.
+	 * Rotta che mostra le statistiche su i tweet(100), per verificare quanti ne siano itaiani.
+	 * @return arrayTweetStats Ritornano le statistiche su i tweet analizzati.
 	 */
 	@GetMapping("/getStatsIT")
 	public JSONArray getStatsTweetIT()
 	{
 		JSONArray arrayTweetStats = new JSONArray();
 		arrayTweetStats = DownloadTweet.getTweet(url, "statsIT");
+		return arrayTweetStats;
+	}
+	
+	
+	/**
+	 * Rotta che mostra le statistiche su i tweet(100), per verificare quanti ne siano tedeschi.
+	 * @return arrayTweetStats Ritornano le statistiche su i tweet analizzati.
+	 */
+	@GetMapping("/getStatsDE")
+	public JSONArray getStatsTweetDE()
+	{
+		JSONArray arrayTweetStats = new JSONArray();
+		arrayTweetStats = DownloadTweet.getTweet(url, "statsDE");
 		return arrayTweetStats;
 	}
 	

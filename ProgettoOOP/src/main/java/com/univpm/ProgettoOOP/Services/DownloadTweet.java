@@ -12,7 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 import com.univpm.ProgettoOOP.Model.Tweet;
-import com.univpm.ProgettoOOP.Statistics.StatsIT;
+import com.univpm.ProgettoOOP.Statistics.*;
 import com.univpm.ProgettoOOP.Util.CountTweet;
 import com.univpm.ProgettoOOP.Util.ParsingJSON;
 
@@ -76,6 +76,28 @@ public class DownloadTweet
 				    	{
 				    		JSONObject objUtente =  (JSONObject) o1.get("user");
 					    	String LocationUtente = (String) objUtente.get("location");
+				    		
+				    		//JSONObject objPosizoneTweet=  (JSONObject) o1.get("place");
+
+				    		
+					    	/*if(objPosizoneTweet != null)
+				    		{
+				    			String DataCreazione = (String) o1.get("created_at");
+						    	String TestoTweet = (String) o1.get("text");
+						    	String ID_Tweet = (String) o1.get("id_str");
+						    	String LinguaTweet = (String) o1.get("lang");
+						    	String PosizioneTweet = (String) objPosizoneTweet.get("coutry_code");
+						    	
+						    	String NomeUtente = (String) objUtente.get("name");
+						    	String ID_utente = (String) objUtente.get("id_str");
+						    	
+						    	if(PosizioneTweet == null) PosizioneTweet = "Not Aviable";
+						    	array = BuildingArrayTweet.Building(ID_Tweet,DataCreazione,
+										TestoTweet,LinguaTweet,
+										PosizioneTweet,NomeUtente,
+										ID_utente, PosizioneTweet);
+				    		}*/
+					    	
 				    		if(!LocationUtente.equals(""))
 				    		{
 				    			String DataCreazione = (String) o1.get("created_at");
@@ -107,7 +129,7 @@ public class DownloadTweet
 			 JSONArray listaDeiTweet = new JSONArray();
 			 listaDeiTweet = (JSONArray) JSONValue.parseWithException(ParsingJSON.ParsingToJSON(array));
 			 array.clear();
-			 
+
 			 if(tipo.equals("lingua"))
 			 {
 				 return CountTweet.analisiLinguaTweet(listaDeiTweet);
@@ -118,7 +140,11 @@ public class DownloadTweet
 			 }	 
 			 else if(tipo.equals("statsIT"))
 			 {
-				 return StatsIT.StatsTweet(listaDeiTweet, objArray.size(), listaDeiTweet.size());
+				 return StatsIT.StatsTweet(CountTweet.analisiLinguaTweet(listaDeiTweet), objArray.size(), listaDeiTweet.size());
+			 }
+			 else if(tipo.equals("statsDE"))
+			 {
+				 return StatsDE.StatsTweet(CountTweet.analisiLinguaTweet(listaDeiTweet), objArray.size(), listaDeiTweet.size());
 			 }
 		}
 		catch (IOException | ParseException e)
