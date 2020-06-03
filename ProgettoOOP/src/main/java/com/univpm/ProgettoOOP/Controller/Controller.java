@@ -3,6 +3,7 @@ package com.univpm.ProgettoOOP.Controller;
 import org.json.simple.JSONArray;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.univpm.ProgettoOOP.Filters.FilterIT_IT;
 import com.univpm.ProgettoOOP.Services.*;
 
 /**
@@ -32,6 +33,8 @@ public class Controller
 	{
 		JSONArray arrayTweetLingua = new JSONArray();
 		arrayTweetLingua = DownloadTweet.getTweet(url, "lingua");
+		//FilterIT_IT filtro = new FilterIT_IT();
+		//filtro.filtroLinguaLocazione(arrayTweetLingua);
 		return arrayTweetLingua;
 	}
 	
@@ -47,8 +50,19 @@ public class Controller
 		return arrayTweetLocation;
 	}
 	
-	/*
-	@GetMapping("/getDataParam")
+	/**
+	 * Rotta che preleva i tweet, e ne effettua l'analisi sulla locazione.
+	 * @return arrayTweetLocation Ritornano i tweet analizzati sulla locazione modellati in formato JSONArray.
+	 */
+	@GetMapping("/getStatsIT")
+	public JSONArray getStatsTweetIT()
+	{
+		JSONArray arrayTweetStats = new JSONArray();
+		arrayTweetStats = DownloadTweet.getTweet(url, "statsIT");
+		return arrayTweetStats;
+	}
+	
+	/*@GetMapping("/getDataParam")
 	public JSONArray getTweetWithParam(@RequestParam(name = "lang", defaultValue = "en") String Lang)
 	{
 		/*if(Lang.equals("it") || Lang.equals("de"))

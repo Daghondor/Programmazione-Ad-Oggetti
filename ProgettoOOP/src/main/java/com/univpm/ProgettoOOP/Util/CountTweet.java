@@ -31,10 +31,6 @@ public class CountTweet
 	public static JSONArray analisiLinguaTweet(JSONArray listaTweet)
 	{
 		tweetLinguaItalianaTedesca.clear();
-		int numeroTweetItaliani = 0, numeroTweetTedeschi = 0;
-		
-		JSONArray listaTweetLinguaItaliana = new JSONArray();
-		JSONArray listaTweetLinguaTedesca = new JSONArray();
 		
 		for (Object o : listaTweet) 
 		{
@@ -45,14 +41,10 @@ public class CountTweet
 				{
 					if (((String) o1.get("Lang")).equals("it")) 
 					{
-						numeroTweetItaliani++;
 						tweetLinguaItalianaTedesca.add(o1);
-						//listaTweetLinguaItaliana.add(o1);
 					} 
 					else if (((String) o1.get("Lang")).equals("de")) 
 					{
-						numeroTweetTedeschi++;
-						//listaTweetLinguaTedesca.add(o1);
 						tweetLinguaItalianaTedesca.add(o1);
 					}
 				} 
@@ -65,9 +57,6 @@ public class CountTweet
 				}
 			}
 		}
-		//tweetLinguaItalianaTedesca.add(listaTweetLinguaItaliana);
-		//tweetLinguaItalianaTedesca.add(listaTweetLinguaTedesca);
-
 	 	return tweetLinguaItalianaTedesca;
 	}
 	

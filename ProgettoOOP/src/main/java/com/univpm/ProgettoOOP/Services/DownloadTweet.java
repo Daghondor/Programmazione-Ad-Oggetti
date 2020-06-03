@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 import com.univpm.ProgettoOOP.Model.Tweet;
+import com.univpm.ProgettoOOP.Statistics.StatsIT;
 import com.univpm.ProgettoOOP.Util.CountTweet;
 import com.univpm.ProgettoOOP.Util.ParsingJSON;
 
@@ -64,7 +65,6 @@ public class DownloadTweet
 			 JSONObject obj = (JSONObject) JSONValue.parseWithException(data);
 			 JSONArray objArray = (JSONArray) obj.get("statuses");
 			 ArrayList<Tweet> array = new ArrayList<Tweet>();
-
 			 
 			 for(Object o: objArray)
 			 {
@@ -91,7 +91,7 @@ public class DownloadTweet
 										TestoTweet,LinguaTweet,
 										PosizioneTweet,NomeUtente,
 										ID_utente, LocationUtente);
-				    		}		    		
+				    		}
 				    	}
 				    	catch(Exception e)
 				    	{
@@ -101,6 +101,7 @@ public class DownloadTweet
 
 				    	}	
 				 	}
+					
 			 }
 			 
 			 JSONArray listaDeiTweet = new JSONArray();
@@ -115,6 +116,10 @@ public class DownloadTweet
 			 {
 				 return CountTweet.analisiLocationTweet(listaDeiTweet);
 			 }	 
+			 else if(tipo.equals("statsIT"))
+			 {
+				 return StatsIT.StatsTweet(listaDeiTweet, objArray.size(), listaDeiTweet.size());
+			 }
 		}
 		catch (IOException | ParseException e)
 		{
