@@ -21,10 +21,9 @@ public class Controller
 	 * result_type = mixed: Ci restituisce i tweet sia recenti, sia popolari.
 	 * since_id = 12345: Viene inserito questo parametro per evitare la ridondanza di tweet già prelevati.
 	 */
-	//private static String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/search/tweets.json?q=Coronavirus&count=100&result_type=mixed&since_id=12345";
-	//private static String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/api/1.1/search/tweets.json?q=Coronavirus&count=100&result_type=mixed&since_id=12345";
-	private static String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/search/tweets.json?q=Coronavirus&count=100&result_type=mixed&since_id=12345";
-
+	private String urlTweet = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/search/tweets.json?q=Coronavirus&count=100&result_type=mixed&since_id=12345";
+	
+	
 	/**
 	 * Rotta che preleva i tweet, e ne effettua l'analisi sulla lingua.
 	 * @return arrayTweetLingua Ritornano i tweet analizzati sulla lingua modellati in formato JSONArray.
@@ -33,9 +32,7 @@ public class Controller
 	public JSONArray getTweetLingua()
 	{
 		JSONArray arrayTweetLingua = new JSONArray();
-		arrayTweetLingua = DownloadTweet.getTweet(url, "lingua");
-		//FilterIT_IT filtro = new FilterIT_IT();
-		//filtro.filtroLinguaLocazione(arrayTweetLingua);
+		arrayTweetLingua = DownloadTweet.getTweet(urlTweet, "lingua");
 		return arrayTweetLingua;
 	}
 	
@@ -47,7 +44,7 @@ public class Controller
 	public JSONArray getTweetLocation()
 	{
 		JSONArray arrayTweetLocation= new JSONArray();
-		arrayTweetLocation = DownloadTweet.getTweet(url, "location");
+		arrayTweetLocation = DownloadTweet.getTweet(urlTweet, "location");
 		return arrayTweetLocation;
 	}
 	
@@ -59,7 +56,7 @@ public class Controller
 	public JSONArray getStatsTweetIT()
 	{
 		JSONArray arrayTweetStats = new JSONArray();
-		arrayTweetStats = DownloadTweet.getTweet(url, "statsIT");
+		arrayTweetStats = DownloadTweet.getTweet(urlTweet, "statsIT");
 		return arrayTweetStats;
 	}
 	
@@ -72,7 +69,7 @@ public class Controller
 	public JSONArray getStatsTweetDE()
 	{
 		JSONArray arrayTweetStats = new JSONArray();
-		arrayTweetStats = DownloadTweet.getTweet(url, "statsDE");
+		arrayTweetStats = DownloadTweet.getTweet(urlTweet, "statsDE");
 		return arrayTweetStats;
 	}
 	

@@ -27,9 +27,9 @@ public class BuildingArrayTweet
 	 * @param locazioneUtente Locazione dell'utente.
 	 * @return arrayLista Lista di array di tipo tweet contenente tutti i tweet (modellati secondo i nostri parametri) che la query di ricerca restituisce.
 	 */
-	public static ArrayList<Tweet> Building(String id_tweet, String dataCreazione, String testo, String lingua, String locazioneTweet, String nomeUtente, String id_utente, String locazioneUtente)
+	public static ArrayList<Tweet> Building(String id_tweet, String dataCreazione, String testo, String lingua, String nazioneTweet, String nomeUtente, String id_utente, String locazioneUtente, String citta)
 	{
-		Tweet singoloTweet = new Tweet(id_tweet, dataCreazione, testo, lingua, locazioneTweet, nomeUtente, id_utente, locazioneUtente);
+		Tweet singoloTweet = new Tweet(id_tweet, dataCreazione, testo, lingua, nazioneTweet, nomeUtente, id_utente, locazioneUtente, citta);
 		arrayLista.add(singoloTweet);
 		return arrayLista;
 	}
