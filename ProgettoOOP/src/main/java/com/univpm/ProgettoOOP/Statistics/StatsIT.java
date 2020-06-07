@@ -8,8 +8,7 @@ import org.json.simple.JSONObject;
 
 public class StatsIT implements Stats
 {	
-	@SuppressWarnings("unused")
-	private static JSONArray tweetStats = new JSONArray();
+	private static JSONArray tweetStatsIT = new JSONArray();
 	
 	@SuppressWarnings("unchecked")
 	public static JSONArray StatsTweet(JSONArray arrayTweet, int NumeroTweet, int NumeroTweetFiltrati)
@@ -18,10 +17,9 @@ public class StatsIT implements Stats
 		float percentualeTweetLinguaItaliana = 0, percentualeTweetLocazioneItaliana = 0;
 		
 		JSONObject statsFinale = new JSONObject();
-		JSONArray statsFinaleArray = new JSONArray();
+		tweetStatsIT.clear();
 		
 		statsFinale.clear();
-		statsFinaleArray.clear();
 		
 		for (Object o : arrayTweet) 
 		{
@@ -60,9 +58,9 @@ public class StatsIT implements Stats
 		statsFinale.put("Percentuale Tweet Lingua Italiana", percentualeTweetLinguaItaliana + "%");
 		statsFinale.put("Numero Di Tweet Con Locazione Italiana", tweetLocazioneItaliana);
 		statsFinale.put("Percentuale Tweet Con Locazione Italiana", percentualeTweetLocazioneItaliana + "%");
-		statsFinaleArray.add(statsFinale);
+		tweetStatsIT.add(statsFinale);
 		percentualeTweetLinguaItaliana = 0;
 		percentualeTweetLocazioneItaliana = 0;
-		return statsFinaleArray;
+		return tweetStatsIT;
 	}
 }

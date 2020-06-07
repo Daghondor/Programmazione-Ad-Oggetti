@@ -59,8 +59,7 @@ public class DownloadTweet
 		arrayCittaIT_DE.clear();
 		arrayCittaIT_DE = prelevaCitta(urlCittaItaliane, urlCittaTedesche);
 		int numeroRandom = 0;
-		
-		
+
 		try 
 		{
 			 URLConnection openConnection = new URL(url).openConnection();
@@ -103,29 +102,35 @@ public class DownloadTweet
 				    	JSONObject o1 = (JSONObject) o; 
 				    	try
 				    	{
-				    		JSONObject objUtente =  (JSONObject) o1.get("user");
-					    	
-				    		// Statuses
-					    	String DataCreazione = (String) o1.get("created_at");
-					    	String TestoTweet = (String) o1.get("text");
-					    	String ID_Tweet = (String) o1.get("id_str");
-					    	String LinguaTweet = (String) o1.get("lang");
-					    	
-					    	
-					    	// Place
-					    	if((String) o1.get("place") == null)
-					    	PosizioneTweet Posizione = arrayCittaIT_DE.get(numeroRandom);
-					    			
-					    	// Users
-					    	String NomeUtente = (String) objUtente.get("name");
-					    	String ID_utente = (String) objUtente.get("id_str");
-					    	String LocationUtente = (String) objUtente.get("location");
-					    	if(LocationUtente.equals("")) LocationUtente = "Not Aviable";
-					  					    	
-					    	array = BuildingArrayTweet.Building(ID_Tweet,DataCreazione,
-									TestoTweet,LinguaTweet,
-									NomeUtente,ID_utente, 
-									LocationUtente,Posizione);
+				    		String LinguaTweet = (String) o1.get("lang");
+				    		if(LinguaTweet.equals("it") | LinguaTweet.equals("de"))
+				    		{
+				    			JSONObject objUtente =  (JSONObject) o1.get("user");
+					    		PosizioneTweet Posizione = null;
+						    	
+					    		// Statuses
+						    	String DataCreazione = (String) o1.get("created_at");
+						    	String TestoTweet = (String) o1.get("text");
+						    	String ID_Tweet = (String) o1.get("id_str");
+						    	
+						    	
+
+						    	// Place
+						    	String PosizioneTweet = (String) o1.get("place");
+						    	if(PosizioneTweet == null) Posizione = arrayCittaIT_DE.get(numeroRandom);
+						    			
+						    	// Users
+						    	String NomeUtente = (String) objUtente.get("name");
+						    	String ID_utente = (String) objUtente.get("id_str");
+						    	String LocationUtente = (String) objUtente.get("location");
+						    	if(LocationUtente.equals("")) LocationUtente = "Not Aviable";
+						  					    	
+						    	array = BuildingArrayTweet.Building(ID_Tweet,DataCreazione,
+										TestoTweet,LinguaTweet,
+										NomeUtente,ID_utente, 
+										LocationUtente,Posizione);
+				    		}
+				    		
 				    	}
 				    	catch(Exception e)
 				    	{
@@ -134,6 +139,8 @@ public class DownloadTweet
 				    		System.out.println("CAUSA: " + e.getCause());
 
 				    	}	
+				    	
+				    	
 				 	}
 					
 			 }

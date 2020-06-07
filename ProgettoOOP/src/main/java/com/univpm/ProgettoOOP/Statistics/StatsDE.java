@@ -8,19 +8,18 @@ import org.json.simple.JSONObject;
 
 public class StatsDE implements Stats
 {
-	@SuppressWarnings("unused")
-	private static JSONArray tweetStats = new JSONArray();
+	private static JSONArray tweetStatsDE = new JSONArray();
 	
 	@SuppressWarnings("unchecked")
 	public static JSONArray StatsTweet(JSONArray arrayTweet, int NumeroTweet, int NumeroTweetFiltrati)
 	{
-		int tweetTedeschi = 0;
-		float percentualeTweetTedeschi = 0;
+		int tweetLinguaTedesca = 0, tweetLocazioneTedesca = 0;
+		float percentualeTweetLinguaTedesca = 0, percentualeTweetLocazioneTedesca = 0;
 		
-		JSONObject c = new JSONObject();
-		JSONArray appoggio = new JSONArray();
-		c.clear();
-		appoggio.clear();
+		JSONObject statsFinale = new JSONObject();
+		tweetStatsDE.clear();
+		
+		statsFinale.clear();
 		
 		for (Object o : arrayTweet) 
 		{
@@ -29,10 +28,16 @@ public class StatsDE implements Stats
 				JSONObject o1 = (JSONObject) o;
 				try 
 				{
+					JSONObject posizione = (JSONObject) o1.get("Posizione");
+					
 					if (((String) o1.get("Lang")).equals("de")) 
 					{
-						tweetTedeschi++;
+						tweetLinguaTedesca++;
 					} 
+					if(((String) posizione.get("Country_Code")).equals("DE"))
+					{
+						tweetLocazioneTedesca++;
+					}
 				} 
 				catch (Exception e) 
 				{
@@ -43,16 +48,19 @@ public class StatsDE implements Stats
 				}
 			}
 		}
-		percentualeTweetTedeschi = (float) BigDecimal.valueOf((float) (tweetTedeschi * 100) / (float) NumeroTweetFiltrati).setScale(2, RoundingMode.HALF_UP).doubleValue();
+		percentualeTweetLinguaTedesca = (float) BigDecimal.valueOf((float) (tweetLinguaTedesca * 100) / (float) NumeroTweetFiltrati).setScale(2, RoundingMode.HALF_UP).doubleValue();
+		percentualeTweetLocazioneTedesca = (float) BigDecimal.valueOf((float) (tweetLocazioneTedesca * 100) / (float) NumeroTweetFiltrati).setScale(2, RoundingMode.HALF_UP).doubleValue();
 		
-		c.put("Tweet Esaminati", NumeroTweet);
-		c.put("Tweet Filtrati", NumeroTweetFiltrati);
-		c.put("Numero Di Tweet Lingua Tedesca", tweetTedeschi);
-		c.put("Percentuale Tweet Lingua Tedesca", percentualeTweetTedeschi + "%");
-		c.put("Numero Di Tweet Con Locazione Tedesca", 0);
-		c.put("Percentuale Tweet Con Locazione Tedesca", 0);
-		appoggio.add(c);
-		percentualeTweetTedeschi = 0;		
-		return appoggio;
+		
+		statsFinale.put("Tweet Esaminati", NumeroTweet);
+		statsFinale.put("Tweet Filtrati", NumeroTweetFiltrati);
+		statsFinale.put("Numero Di Tweet Lingua Tedesca", tweetLinguaTedesca );
+		statsFinale.put("Percentuale Tweet Lingua Tedesca", percentualeTweetLinguaTedesca  + "%");
+		statsFinale.put("Numero Di Tweet Con Locazione Tedesca", tweetLocazioneTedesca );
+		statsFinale.put("Percentuale Tweet Con Locazione Tedesca", percentualeTweetLocazioneTedesca  + "%");
+		tweetStatsDE.add(statsFinale);
+		percentualeTweetLinguaTedesca  = 0;
+		percentualeTweetLocazioneTedesca = 0;
+		return tweetStatsDE;
 	}
 }
