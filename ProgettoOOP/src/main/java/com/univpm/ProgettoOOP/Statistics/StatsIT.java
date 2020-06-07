@@ -14,13 +14,14 @@ public class StatsIT implements Stats
 	@SuppressWarnings("unchecked")
 	public static JSONArray StatsTweet(JSONArray arrayTweet, int NumeroTweet, int NumeroTweetFiltrati)
 	{
-		int tweetItaliani = 0;
-		float percentualeTweetItaliani = 0;
+		int tweetLinguaItaliana = 0, tweetLocazioneItaliana = 0;
+		float percentualeTweetLinguaItaliana = 0, percentualeTweetLocazioneItaliana = 0;
 		
-		JSONObject c = new JSONObject();
-		JSONArray appoggio = new JSONArray();
-		c.clear();
-		appoggio.clear();
+		JSONObject statsFinale = new JSONObject();
+		JSONArray statsFinaleArray = new JSONArray();
+		
+		statsFinale.clear();
+		statsFinaleArray.clear();
 		
 		for (Object o : arrayTweet) 
 		{
@@ -29,10 +30,16 @@ public class StatsIT implements Stats
 				JSONObject o1 = (JSONObject) o;
 				try 
 				{
+					JSONObject posizione = (JSONObject) o1.get("Posizione");
+					
 					if (((String) o1.get("Lang")).equals("it")) 
 					{
-						tweetItaliani++;
+						tweetLinguaItaliana++;
 					} 
+					if(((String) posizione.get("Country_Code")).equals("IT"))
+					{
+						tweetLocazioneItaliana++;
+					}
 				} 
 				catch (Exception e) 
 				{
@@ -43,16 +50,19 @@ public class StatsIT implements Stats
 				}
 			}
 		}
-		percentualeTweetItaliani = (float) BigDecimal.valueOf((float) (tweetItaliani * 100) / (float) NumeroTweetFiltrati).setScale(2, RoundingMode.HALF_UP).doubleValue();
+		percentualeTweetLinguaItaliana = (float) BigDecimal.valueOf((float) (tweetLinguaItaliana * 100) / (float) NumeroTweetFiltrati).setScale(2, RoundingMode.HALF_UP).doubleValue();
+		percentualeTweetLocazioneItaliana = (float) BigDecimal.valueOf((float) (tweetLocazioneItaliana * 100) / (float) NumeroTweetFiltrati).setScale(2, RoundingMode.HALF_UP).doubleValue();
 		
-		c.put("Tweet Esaminati", NumeroTweet);
-		c.put("Tweet Filtrati", NumeroTweetFiltrati);
-		c.put("Numero Di Tweet Lingua Italiana", tweetItaliani);
-		c.put("Percentuale Tweet Lingua Italiana", percentualeTweetItaliani + "%");
-		c.put("Numero Di Tweet Con Locazione Italiana", 0);
-		c.put("Percentuale Tweet Con Locazione Italiana", 0);
-		appoggio.add(c);
-		percentualeTweetItaliani = 0;
-		return appoggio;
+		
+		statsFinale.put("Tweet Esaminati", NumeroTweet);
+		statsFinale.put("Tweet Filtrati", NumeroTweetFiltrati);
+		statsFinale.put("Numero Di Tweet Lingua Italiana", tweetLinguaItaliana);
+		statsFinale.put("Percentuale Tweet Lingua Italiana", percentualeTweetLinguaItaliana + "%");
+		statsFinale.put("Numero Di Tweet Con Locazione Italiana", tweetLocazioneItaliana);
+		statsFinale.put("Percentuale Tweet Con Locazione Italiana", percentualeTweetLocazioneItaliana + "%");
+		statsFinaleArray.add(statsFinale);
+		percentualeTweetLinguaItaliana = 0;
+		percentualeTweetLocazioneItaliana = 0;
+		return statsFinaleArray;
 	}
 }

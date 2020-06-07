@@ -1,6 +1,8 @@
 package com.univpm.ProgettoOOP.Services;
 
 import java.util.ArrayList;
+
+import com.univpm.ProgettoOOP.Model.PosizioneTweet;
 import com.univpm.ProgettoOOP.Model.Tweet;
 
 /**
@@ -27,9 +29,9 @@ public class BuildingArrayTweet
 	 * @param locazioneUtente Locazione dell'utente.
 	 * @return arrayLista Lista di array di tipo tweet contenente tutti i tweet (modellati secondo i nostri parametri) che la query di ricerca restituisce.
 	 */
-	public static ArrayList<Tweet> Building(String id_tweet, String dataCreazione, String testo, String lingua, String nazioneTweet, String nomeUtente, String id_utente, String locazioneUtente, String citta)
+	public static ArrayList<Tweet> Building(String id_tweet, String dataCreazione, String testo, String lingua, String nomeUtente, String id_utente, String locazioneUtente, PosizioneTweet posizione)
 	{
-		Tweet singoloTweet = new Tweet(id_tweet, dataCreazione, testo, lingua, nazioneTweet, nomeUtente, id_utente, locazioneUtente, citta);
+		Tweet singoloTweet = new Tweet(id_tweet, dataCreazione, testo, lingua, nomeUtente, id_utente, locazioneUtente, posizione);
 		arrayLista.add(singoloTweet);
 		return arrayLista;
 	}

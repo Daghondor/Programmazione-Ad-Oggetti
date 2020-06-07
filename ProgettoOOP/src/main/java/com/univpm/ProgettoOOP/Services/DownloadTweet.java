@@ -58,7 +58,8 @@ public class DownloadTweet
 	{
 		arrayCittaIT_DE.clear();
 		arrayCittaIT_DE = prelevaCitta(urlCittaItaliane, urlCittaTedesche);
-		int numeroRandom = randomCity(arrayCittaIT_DE.size());
+		int numeroRandom = 0;
+		
 		
 		try 
 		{
@@ -95,6 +96,8 @@ public class DownloadTweet
 			 
 			 for(Object o: objArray)
 			 {
+				 numeroRandom = 0;
+				 numeroRandom = randomCity(arrayCittaIT_DE.size());
 					if (o instanceof JSONObject)
 					{
 				    	JSONObject o1 = (JSONObject) o; 
@@ -107,17 +110,12 @@ public class DownloadTweet
 					    	String TestoTweet = (String) o1.get("text");
 					    	String ID_Tweet = (String) o1.get("id_str");
 					    	String LinguaTweet = (String) o1.get("lang");
-	
-					    	// Place
-					    	String NazioneTweet = (String) o1.get("place");
-					    	if(NazioneTweet == null) NazioneTweet = "Not Aviable";
-					    	else
-					    	{
-					    		JSONObject objPlace = (JSONObject) o1.get("place");
-					    		NazioneTweet = (String) objPlace.get("coutry_code");
-					    	}
-					    	String CittaTweet = "Not Aviable";
 					    	
+					    	
+					    	// Place
+					    	if((String) o1.get("place") == null)
+					    	PosizioneTweet Posizione = arrayCittaIT_DE.get(numeroRandom);
+					    			
 					    	// Users
 					    	String NomeUtente = (String) objUtente.get("name");
 					    	String ID_utente = (String) objUtente.get("id_str");
@@ -126,9 +124,8 @@ public class DownloadTweet
 					  					    	
 					    	array = BuildingArrayTweet.Building(ID_Tweet,DataCreazione,
 									TestoTweet,LinguaTweet,
-									NazioneTweet,NomeUtente,
-									ID_utente, LocationUtente,
-									CittaTweet);
+									NomeUtente,ID_utente, 
+									LocationUtente,Posizione);
 				    	}
 				    	catch(Exception e)
 				    	{
