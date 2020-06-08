@@ -56,7 +56,8 @@ public class DownloadTweet
 	 */
 	public static JSONArray getTweet(String url, String tipo)
 	{
-		arrayCittaIT_DE.clear();
+		
+		//arrayCittaIT_DE.clear();
 		arrayCittaIT_DE = prelevaCitta(urlCittaItaliane, urlCittaTedesche);
 		try 
 		{
@@ -162,19 +163,13 @@ public class DownloadTweet
 			 {
 				 StatsIT statsIT = new StatsIT(CountTweet.analisiLinguaTweet(listaDeiTweet));
 				 JSONArray pout = statsIT.StatsTweet(CountTweet.analisiLinguaTweet(listaDeiTweet), "IT");
-				 //JSONArray pulito = CountTweet.analisiLinguaTweet(listaDeiTweet);
-				 //StatsIT statsIT = new StatsIT(array);
-				 //ArrayList<Tweet> pout = statsIT.StatsTweet(listaDeiTweet, "IT");
-				 System.out.println("POUT"+pout);
-				 //c.StatsTweet(pulito, objArray.size(), pulito.size(), "IT");
-				 
-				 //return StatsIT.StatsTweet(CountTweet.analisiLinguaTweet(listaDeiTweet), objArray.size(), CountTweet.analisiLinguaTweet(listaDeiTweet).size());
+				 return pout;
 			 }
 			 else if(tipo.equals("DE"))
 			 {
-				 StatsIT statsDE = new StatsIT(listaDeiTweet);
-				 JSONArray pout = statsDE.StatsTweet(listaDeiTweet, "DE");
-				 //return StatsDE.StatsTweet(CountTweet.analisiLinguaTweet(listaDeiTweet), objArray.size(), listaDeiTweet.size());
+				 StatsIT statsDE = new StatsIT(CountTweet.analisiLinguaTweet(listaDeiTweet));
+				 JSONArray pout = statsDE.StatsTweet(CountTweet.analisiLinguaTweet(listaDeiTweet), "DE");
+				 return pout;
 			 }
 		}
 		catch (IOException | ParseException e)
