@@ -2,6 +2,7 @@ package com.univpm.ProgettoOOP.Controller;
 
 import org.json.simple.JSONArray;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.univpm.ProgettoOOP.Services.*;
 
@@ -23,11 +24,8 @@ public class Controller
 	 */
 	private String urlTweet = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/search/tweets.json?q=Coronavirus&count=100&result_type=mixed&since_id=12345";
 	
-	
-	/**
-	 * Rotta che preleva i tweet, e ne effettua l'analisi sulla lingua.
-	 * @return arrayTweetLingua Ritornano i tweet analizzati sulla lingua modellati in formato JSONArray.
-	 */
+	/*
+
 	@GetMapping("/getDataLanguage")
 	public JSONArray getTweetLingua()
 	{
@@ -36,10 +34,7 @@ public class Controller
 		return arrayTweetLingua;
 	}
 	
-	/**
-	 * Rotta che preleva i tweet, e ne effettua l'analisi sulla locazione.
-	 * @return arrayTweetLocation Ritornano i tweet analizzati sulla locazione modellati in formato JSONArray.
-	 */
+
 	@GetMapping("/getDataLocation")
 	public JSONArray getTweetLocation()
 	{
@@ -47,48 +42,38 @@ public class Controller
 		arrayTweetLocation = DownloadTweet.getTweet(urlTweet, "location");
 		return arrayTweetLocation;
 	}
+	*/
 	
-	/**
-	 * Rotta che mostra le statistiche su i tweet(100), per verificare quanti ne siano itaiani.
-	 * @return arrayTweetStats Ritornano le statistiche su i tweet analizzati.
-	 */
-	@GetMapping("/getStatsIT")
-	public JSONArray getStatsTweetIT()
+	
+	@GetMapping("/getData")
+	public JSONArray getTweet(@RequestParam(name = "tipo", defaultValue = "lingua") String Tipo)
 	{
-		JSONArray arrayTweetStats = new JSONArray();
-		arrayTweetStats = DownloadTweet.getTweet(urlTweet, "statsIT");
-		return arrayTweetStats;
+		JSONArray arrayTweet = new JSONArray();
+		arrayTweet = DownloadTweet.getTweet(urlTweet, Tipo);
+		return arrayTweet;
 	}
 	
+	/**
+	 * Rotta che mostra le statistiche su i tweet(100), per verificare quanti ne siano italiani (Lingua & Locazione).
+	 * @return arrayTweetStats Ritornano le statistiche su i tweet analizzati.
+	 */
+	@GetMapping("/getStats")
+	public JSONArray getStatsTweetIT(@RequestParam(name = "tipo", defaultValue = "IT") String Tipo)
+	{
+		JSONArray arrayTweetStatsIT = new JSONArray();
+		arrayTweetStatsIT = DownloadTweet.getTweet(urlTweet, Tipo);
+		return arrayTweetStatsIT;
+	}
 	
 	/**
-	 * Rotta che mostra le statistiche su i tweet(100), per verificare quanti ne siano tedeschi.
+	 * Rotta che mostra le statistiche su i tweet(100), per verificare quanti ne siano tedeschi (Lingua & Locazione).
 	 * @return arrayTweetStats Ritornano le statistiche su i tweet analizzati.
 	 */
 	@GetMapping("/getStatsDE")
 	public JSONArray getStatsTweetDE()
 	{
-		JSONArray arrayTweetStats = new JSONArray();
-		arrayTweetStats = DownloadTweet.getTweet(urlTweet, "statsDE");
-		return arrayTweetStats;
+		JSONArray arrayTweetStatsDE = new JSONArray();
+		arrayTweetStatsDE = DownloadTweet.getTweet(urlTweet, "statsDE");
+		return arrayTweetStatsDE;
 	}
-	
-	/*@GetMapping("/getDataParam")
-	public JSONArray getTweetWithParam(@RequestParam(name = "lang", defaultValue = "en") String Lang)
-	{
-		/*if(Lang.equals("it") || Lang.equals("de"))
-		{
-			String parametroLang = "&lang=" + Lang;
-			return DownloadTweet.getTweet(url.substring(0, url.length()) + parametroLang);
-		}
-		else
-		{
-			return null;
-		}
-		String parametroLang = "&lang=" + Lang;
-		JSONArray arrayTweetLinguaIT = new JSONArray();
-		arrayTweetLinguaIT = DownloadTweet.getTweet(url.substring(0, url.length()) + parametroLang);
-		return arrayTweetLinguaIT;
-	}
-*/
 }

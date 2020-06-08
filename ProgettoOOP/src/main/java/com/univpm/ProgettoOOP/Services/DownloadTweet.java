@@ -58,8 +58,6 @@ public class DownloadTweet
 	{
 		arrayCittaIT_DE.clear();
 		arrayCittaIT_DE = prelevaCitta(urlCittaItaliane, urlCittaTedesche);
-		int numeroRandom = 0;
-
 		try 
 		{
 			 URLConnection openConnection = new URL(url).openConnection();
@@ -95,54 +93,57 @@ public class DownloadTweet
 			 
 			 for(Object o: objArray)
 			 {
-				 numeroRandom = 0;
-				 numeroRandom = randomCity(arrayCittaIT_DE.size());
-					if (o instanceof JSONObject)
-					{
-				    	JSONObject o1 = (JSONObject) o; 
-				    	try
-				    	{
-				    		String LinguaTweet = (String) o1.get("lang");
-				    		if(LinguaTweet.equals("it") | LinguaTweet.equals("de"))
-				    		{
-				    			JSONObject objUtente =  (JSONObject) o1.get("user");
-					    		PosizioneTweet Posizione = null;
-						    	
-					    		// Statuses
-						    	String DataCreazione = (String) o1.get("created_at");
-						    	String TestoTweet = (String) o1.get("text");
-						    	String ID_Tweet = (String) o1.get("id_str");
-						    	
-						    	
+				 if (o instanceof JSONObject)
+				 {
+					 JSONObject o1 = (JSONObject) o; 
+					 try
+					 {
+						 // Statuses
+						 String DataCreazione = (String) o1.get("created_at");
+						 String TestoTweet = (String) o1.get("text");
+						 String ID_Tweet = (String) o1.get("id_str");
+						 String LinguaTweet = (String) o1.get("lang");
 
-						    	// Place
-						    	String PosizioneTweet = (String) o1.get("place");
-						    	if(PosizioneTweet == null) Posizione = arrayCittaIT_DE.get(numeroRandom);
-						    			
-						    	// Users
-						    	String NomeUtente = (String) objUtente.get("name");
-						    	String ID_utente = (String) objUtente.get("id_str");
-						    	String LocationUtente = (String) objUtente.get("location");
-						    	if(LocationUtente.equals("")) LocationUtente = "Not Aviable";
-						  					    	
-						    	array = BuildingArrayTweet.Building(ID_Tweet,DataCreazione,
-										TestoTweet,LinguaTweet,
-										NomeUtente,ID_utente, 
-										LocationUtente,Posizione);
-				    		}
-				    		
-				    	}
-				    	catch(Exception e)
-				    	{
-				    		System.out.println("ERRORE. OPERAZIONE INTERROTTA NEL PRELEVAGGIO DEI PARAMETRI.");
-				    		System.out.println("MESSAGGIO: " + e.getMessage());
-				    		System.out.println("CAUSA: " + e.getCause());
+						 // Users
+						 JSONObject objUtente = (JSONObject) o1.get("user");
+						 String NomeUtente = (String) objUtente.get("name");
+						 String ID_utente = (String) objUtente.get("id_str");
+						 String LocationUtente = (String) objUtente.get("location");
+						 if (LocationUtente.equals("")) LocationUtente = "Not Aviable";
 
-				    	}	
-				    	
-				    	
-				 	}
-					
+						 // Place
+						 JSONObject objPosizione = (JSONObject) o1.get("place");
+						 PosizioneTweet Posizione = null;
+						 if(objPosizione != null)
+						 {
+							 String PosizioneID = (String) o1.get("id");
+							 String PosizioneName = (String) o1.get("name");
+							 String PosizioneFullName = (String) o1.get("full_name");
+							 String PosizionePlaceType = (String) o1.get("place_type");
+							 String PosizioneCountryCode = (String) o1.get("country_code");
+							 String PosizioneCountry = (String) o1.get("country");
+							 Posizione = new PosizioneTweet(PosizioneID, PosizionePlaceType, 
+									 PosizioneName, PosizioneFullName, 
+									 PosizioneCountryCode, PosizioneCountry);
+						 }
+						 else if(objPosizione == null)
+						 {
+							 if(LinguaTweet.equals("it") | LinguaTweet.equals("de"))
+							 {
+								 int numeroRandom = randomCity(arrayCittaIT_DE.size());
+								 Posizione = arrayCittaIT_DE.get(numeroRandom);
+							 }
+						 }
+						 array = BuildingArrayTweet.Building(ID_Tweet, DataCreazione, TestoTweet, LinguaTweet,
+								 NomeUtente, ID_utente, LocationUtente, Posizione);
+					 }
+					 catch(Exception e)
+					 {
+						 System.out.println("ERRORE. OPERAZIONE INTERROTTA NEL PRELEVAGGIO DEI PARAMETRI.");
+						 System.out.println("MESSAGGIO: " + e.getMessage());
+						 System.out.println("CAUSA: " + e.getCause());
+					 }	
+				 }
 			 }
 			 
 			 JSONArray listaDeiTweet = new JSONArray();
@@ -156,14 +157,24 @@ public class DownloadTweet
 			 else if(tipo.equals("location"))
 			 {
 				 return CountTweet.analisiLocationTweet(listaDeiTweet);
-			 }	 
-			 else if(tipo.equals("statsIT"))
-			 {
-				 return StatsIT.StatsTweet(CountTweet.analisiLinguaTweet(listaDeiTweet), objArray.size(), listaDeiTweet.size());
 			 }
-			 else if(tipo.equals("statsDE"))
+			 else if(tipo.equals("IT"))
 			 {
-				 return StatsDE.StatsTweet(CountTweet.analisiLinguaTweet(listaDeiTweet), objArray.size(), listaDeiTweet.size());
+				 StatsIT statsIT = new StatsIT(CountTweet.analisiLinguaTweet(listaDeiTweet));
+				 JSONArray pout = statsIT.StatsTweet(CountTweet.analisiLinguaTweet(listaDeiTweet), "IT");
+				 //JSONArray pulito = CountTweet.analisiLinguaTweet(listaDeiTweet);
+				 //StatsIT statsIT = new StatsIT(array);
+				 //ArrayList<Tweet> pout = statsIT.StatsTweet(listaDeiTweet, "IT");
+				 System.out.println("POUT"+pout);
+				 //c.StatsTweet(pulito, objArray.size(), pulito.size(), "IT");
+				 
+				 //return StatsIT.StatsTweet(CountTweet.analisiLinguaTweet(listaDeiTweet), objArray.size(), CountTweet.analisiLinguaTweet(listaDeiTweet).size());
+			 }
+			 else if(tipo.equals("DE"))
+			 {
+				 StatsIT statsDE = new StatsIT(listaDeiTweet);
+				 JSONArray pout = statsDE.StatsTweet(listaDeiTweet, "DE");
+				 //return StatsDE.StatsTweet(CountTweet.analisiLinguaTweet(listaDeiTweet), objArray.size(), listaDeiTweet.size());
 			 }
 		}
 		catch (IOException | ParseException e)
@@ -178,7 +189,6 @@ public class DownloadTweet
     		System.out.println("MESSAGGIO: " + e.getMessage());
     		System.out.println("CAUSA: " + e.getCause());
 		}
-		
 		return null;
 	}
 	
@@ -368,6 +378,7 @@ public class DownloadTweet
 		}
 		return null;
 	}
+	
 	
 	/**
 	 * Metodo statico che genera in maniera casuale un numero che verra' usato

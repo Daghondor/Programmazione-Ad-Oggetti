@@ -27,7 +27,7 @@ public class CountTweet
 	 * @param listaTweet Lista dei tweet (100) in cui verrà fatta l'analisi.
 	 * @return tweetLinguaItalianaTedesca Ritorna l'oggetto JSONArray contenente tutti i tweet in lingua italiana e tedesca.
 	 */
-	@SuppressWarnings({ "unchecked", "unused" })
+	@SuppressWarnings({ "unchecked" })
 	public static JSONArray analisiLinguaTweet(JSONArray listaTweet)
 	{
 		tweetLinguaItalianaTedesca.clear();
@@ -53,7 +53,6 @@ public class CountTweet
 					System.out.println("ERRORE.");
 					System.out.println("MESSAGGIO: " + e.getMessage());
 					System.out.println("CAUSA: " + e.getCause());
-
 				}
 			}
 		}
@@ -68,14 +67,10 @@ public class CountTweet
 	 * @param listaTweet Lista dei tweet (100) in cui verrà fatta l'analisi.
 	 * @return tweetLocationItaliaGermania Ritorna l'oggetto JSONArray contenente tutti i tweet con la locazione italia e germania.
 	 */
-	@SuppressWarnings({ "unchecked", "unused" })
+	@SuppressWarnings({ "unchecked" })
 	public static JSONArray analisiLocationTweet(JSONArray listaTweet)
 	{
 		tweetLocationItaliaGermania.clear();
-		int numeroTweetItaliani = 0, numeroTweetTedeschi = 0;
-		
-		JSONArray listaTweetLocationItalia = new JSONArray();
-		JSONArray listaTweetLocationGermania = new JSONArray();
 		
 		for (Object o : listaTweet) 
 		{
@@ -84,13 +79,15 @@ public class CountTweet
 				JSONObject o1 = (JSONObject) o;
 				try 
 				{
-					if (((String) o1.get("Location")).equals("Italy")) 
+					JSONObject posizione = (JSONObject) o1.get("Posizione");
+					
+					if (((String) posizione.get("Country_Code")).equals("IT")) 
 					{
-						listaTweetLocationItalia.add(o1);
+						tweetLocationItaliaGermania.add(o1);
 					} 
-					else if (((String) o1.get("Location")).equals("Germany")) 
+					else if (((String) posizione.get("Country_Code")).equals("DE")) 
 					{
-						listaTweetLocationGermania.add(o1);
+						tweetLocationItaliaGermania.add(o1);
 					}
 				} 
 				catch (Exception e) 
@@ -98,13 +95,9 @@ public class CountTweet
 					System.out.println("ERRORE.");
 					System.out.println("MESSAGGIO: " + e.getMessage());
 					System.out.println("CAUSA: " + e.getCause());
-
 				}
 			}
 		}
-		tweetLocationItaliaGermania.add(listaTweetLocationItalia);
-		tweetLocationItaliaGermania.add(listaTweetLocationGermania);
-		
 		return tweetLocationItaliaGermania;
 	}
 }

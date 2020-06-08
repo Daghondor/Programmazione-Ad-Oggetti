@@ -1,11 +1,10 @@
 package com.univpm.ProgettoOOP.Statistics;
 
+import java.util.Collection;
+
 import org.json.simple.JSONArray;
 
-public interface Stats
+public interface Stats<T>
 {
-	public static JSONArray StatsTweet(JSONArray arrayTweet, int NumeroTweet, int NumeroTweetFiltrati)
-	{
-		return null;
-	}
+	abstract JSONArray StatsTweet(JSONArray arrayTweet, T lingua);
 }
