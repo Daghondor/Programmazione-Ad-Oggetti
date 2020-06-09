@@ -13,6 +13,7 @@ public interface Filter
 	/**
 	 * Questo metodo retituisce l'array di tweet che contengono tutti i tweet
 	 * che rispettano le condizioni di filtraggio.
+	 * @param arrayTweet Array conenente i tweet Italiani e Tedeschi.
 	 * @return Ritorna l'array di tweet filtrati in base ad i parametri (Lingua - Locazione).
 	 */
 	public JSONArray filtroLinguaLocazione(JSONArray arrayTweet);

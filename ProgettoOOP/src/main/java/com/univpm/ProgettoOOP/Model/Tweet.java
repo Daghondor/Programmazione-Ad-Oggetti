@@ -49,11 +49,10 @@ public class Tweet
 	 * @param data Data di creazione del tweet.
 	 * @param text Testo del tweet.
 	 * @param lang Lingua del tweet.
-	 * @param nazione_Tweet Nazione del tweet.
 	 * @param nome_Utente Nome dell'utente.
 	 * @param iD_Utente ID dell'utente.
 	 * @param location_Utente Locazione dell'utente.
-	 * @param citta Citta' del tweet.
+	 * @param posizione Posizione del tweet.
 	 */
 	public Tweet(String iD_Tweet, String data, 
 				String text, String lang, 
