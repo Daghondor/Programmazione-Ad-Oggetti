@@ -13,7 +13,6 @@ import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 import com.univpm.ProgettoOOP.Model.*;
 import com.univpm.ProgettoOOP.Model.Tweet;
-import com.univpm.ProgettoOOP.Statistics.*;
 import com.univpm.ProgettoOOP.Util.*;
 
 /**
@@ -34,6 +33,7 @@ public class DownloadTweet
 	 * La stringa è composta da:
 	 * lat: Latitudine del punto.
 	 * lot: Longitudine del punto.
+	 * accuracy: Indica il raggio massimo per prelevare le citta'.
 	 */
 	private static String urlCittaItaliane = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/geo/search.json?lat=43.0087&lon=12.7716&accuracy=100000m";
 	
@@ -43,21 +43,19 @@ public class DownloadTweet
 	 * La stringa è composta da:
 	 * lat: Latitudine del punto.
 	 * lot: Longitudine del punto.
+	 * accuracy: Indica il raggio massimo per prelevare le citta'.
 	 */
-	private static String urlCittaTedesche = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/geo/search.json?lat=51.0690&lon=10.0305";
+	private static String urlCittaTedesche = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/geo/search.json?lat=51.0690&lon=10.0305&accuracy=100000m";
 	
 	/**
 	 * Metodo statico che preleva i tweet dall'URL passato dal controller, successivamente
 	 * effettua l'estrapolazione dei soli parametri che ci servono per creare il nostro oggetto
-	 * Tweet, e passa questi dati alla classe che si occupa della creazione di questi oggetti.
+	 * Tweet, ed infine l'array di tweet modellato ritorna al controller che ne effettua le dovute analisi.
 	 * @param url URL delle API (proxy) di Twitter.
-	 * @param tipo Tipologia di chiamata che determina il tipo di analisi che verrà eseguita su i tweet (lingua o locazione).
 	 * @return listaDeiTweet Ritorna al controller la lista dei tweet modellati.
 	 */
-	public static JSONArray getTweet(String url, String tipo)
+	public static JSONArray getTweet(String url)
 	{
-		
-		//arrayCittaIT_DE.clear();
 		arrayCittaIT_DE = prelevaCitta(urlCittaItaliane, urlCittaTedesche);
 		try 
 		{
@@ -79,9 +77,9 @@ public class DownloadTweet
 			 } 
 			 catch (IOException e) 
 			 {
-		    		System.out.println("ERRORE. OPERAZIONE I/O INTERROTTA.");
-		    		System.out.println("MESSAGGIO: " + e.getMessage());
-		    		System.out.println("CAUSA: " + e.getCause());
+				 System.out.println("ERRORE. OPERAZIONE I/O INTERROTTA.");
+				 System.out.println("MESSAGGIO: " + e.getMessage());
+				 System.out.println("CAUSA: " + e.getCause());
 			 }
 			 finally
 			 {
@@ -124,8 +122,8 @@ public class DownloadTweet
 							 String PosizioneCountryCode = (String) o1.get("country_code");
 							 String PosizioneCountry = (String) o1.get("country");
 							 Posizione = new PosizioneTweet(PosizioneID, PosizionePlaceType, 
-									 PosizioneName, PosizioneFullName, 
-									 PosizioneCountryCode, PosizioneCountry);
+									 						PosizioneName, PosizioneFullName, 
+									 						PosizioneCountryCode, PosizioneCountry);
 						 }
 						 else if(objPosizione == null)
 						 {
@@ -135,8 +133,10 @@ public class DownloadTweet
 								 Posizione = arrayCittaIT_DE.get(numeroRandom);
 							 }
 						 }
-						 array = BuildingArrayTweet.Building(ID_Tweet, DataCreazione, TestoTweet, LinguaTweet,
-								 NomeUtente, ID_utente, LocationUtente, Posizione);
+						 array = BuildingArrayTweet.Building(ID_Tweet, DataCreazione, 
+								 							 TestoTweet, LinguaTweet,
+								 							 NomeUtente, ID_utente, 
+								 							 LocationUtente, Posizione);
 					 }
 					 catch(Exception e)
 					 {
@@ -150,27 +150,7 @@ public class DownloadTweet
 			 JSONArray listaDeiTweet = new JSONArray();
 			 listaDeiTweet = (JSONArray) JSONValue.parseWithException(ParsingJSON.ParsingToJSON(array));
 			 array.clear();
-
-			 if(tipo.equals("lingua"))
-			 {
-				 return CountTweet.analisiLinguaTweet(listaDeiTweet);
-			 }
-			 else if(tipo.equals("location"))
-			 {
-				 return CountTweet.analisiLocationTweet(listaDeiTweet);
-			 }
-			 else if(tipo.equals("IT"))
-			 {
-				 StatsIT statsIT = new StatsIT(CountTweet.analisiLinguaTweet(listaDeiTweet));
-				 JSONArray pout = statsIT.StatsTweet(CountTweet.analisiLinguaTweet(listaDeiTweet), "IT");
-				 return pout;
-			 }
-			 else if(tipo.equals("DE"))
-			 {
-				 StatsIT statsDE = new StatsIT(CountTweet.analisiLinguaTweet(listaDeiTweet));
-				 JSONArray pout = statsDE.StatsTweet(CountTweet.analisiLinguaTweet(listaDeiTweet), "DE");
-				 return pout;
-			 }
+			 return listaDeiTweet;
 		}
 		catch (IOException | ParseException e)
 		{

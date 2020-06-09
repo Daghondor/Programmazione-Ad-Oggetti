@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import com.univpm.ProgettoOOP.Services.DownloadTweet;
+import com.univpm.ProgettoOOP.Util.CountTweet;
 
 
 /**
@@ -20,8 +21,24 @@ import com.univpm.ProgettoOOP.Services.DownloadTweet;
 @SpringBootTest
 public class ProgettoOopApplicationTests
 {
-	private JSONArray arrayTweetLingua = null;
+	/**
+	 * Array che conterra' i tweet (100 casuali).
+	 */
+	private JSONArray arrayTweet = null;
+	
+	/**
+	 * Array che conterra' i tweet con la locazione Italiana e Tedesca.
+	 */
 	private JSONArray arrayTweetLocation = null;
+	
+	/**
+	 * Array che conterra' i tweet con la lingua Italiana e Tedesca.
+	 */
+	private JSONArray arrayTweetLingua = null;
+	
+	/**
+	 * URL della API di Twitter.
+	 */
 	private String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/search/tweets.json?q=Coronavirus&count=100&result_type=mixed&since_id=12345";
 
 	
@@ -32,11 +49,12 @@ public class ProgettoOopApplicationTests
 	@BeforeEach
 	public void setUp() throws Exception 
 	{
+		arrayTweet = new JSONArray();
 		arrayTweetLingua = new JSONArray();
-		arrayTweetLingua = DownloadTweet.getTweet(url, "lingua");
-		
 		arrayTweetLocation = new JSONArray();
-		arrayTweetLocation = DownloadTweet.getTweet(url, "location");
+		arrayTweet = DownloadTweet.getTweet(url);
+		arrayTweetLingua = CountTweet.analisiLinguaTweet(arrayTweet);
+		arrayTweetLocation = CountTweet.analisiLocationTweet(arrayTweet);
 	}
 
 	/**
