@@ -54,6 +54,7 @@ public class DownloadTweet
 	 * Tweet, ed infine l'array di tweet modellato ritorna al controller che ne effettua le dovute analisi.
 	 * @param url URL delle API (proxy) di Twitter.
 	 * @return listaDeiTweet Ritorna al controller la lista dei tweet modellati.
+	 * @throws TweetException Eccezione personalizzata per l'array di tweet se e' vuoto o e' null.
 	 */
 	public static JSONArray getTweet(String url) throws TweetException
 	{

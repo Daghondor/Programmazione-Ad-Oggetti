@@ -1,11 +1,15 @@
 package com.univpm.ProgettoOOP.Controller;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.univpm.ProgettoOOP.Exception.TweetException;
+import com.univpm.ProgettoOOP.Filters.FilterIT_IT;
 import com.univpm.ProgettoOOP.Services.*;
 import com.univpm.ProgettoOOP.Statistics.StatsIT_DE;
 import com.univpm.ProgettoOOP.Util.CountTweet;
@@ -37,7 +41,7 @@ public class Controller
 	 * @throws TweetException Eccezione personalizzata per l'array di tweet se e' vuoto o e' null.
 	 */
 	@GetMapping("/getData")
-	public JSONArray getTweet(@RequestParam(name = "tipo", defaultValue = "lingua") String Tipo) throws TweetException
+	public JSONArray getData(@RequestParam(name = "tipo", defaultValue = "lingua") String Tipo) throws TweetException
 	{
 		JSONArray arrayTweet = new JSONArray();
 		arrayTweet = DownloadTweet.getTweet(urlTweet);
@@ -62,7 +66,7 @@ public class Controller
 	 * @throws TweetException Eccezione personalizzata per l'array di tweet se e' vuoto o e' null.
 	 */
 	@GetMapping("/getStats")
-	public JSONArray getStatsTweetIT(@RequestParam(name = "tipo", defaultValue = "IT") String Tipo) throws TweetException 
+	public JSONArray getStats(@RequestParam(name = "tipo", defaultValue = "IT") String Tipo) throws TweetException 
 	{
 		JSONArray arrayTweet = new JSONArray();
 		arrayTweet = DownloadTweet.getTweet(urlTweet);
@@ -81,4 +85,48 @@ public class Controller
 		}
 		return null;
 	}
+	
+	/**
+	 * Rotta di tipo POST che effettua il filtraggio dei tweet in base alla lingua e locazione
+	 * inserita dall'utente.
+	 * La Lingua e la Locazione vengono prelevate dal body della richiesta.
+	 * @param bodyFilter Body della richiesta POST contenente la lingua e la locazione.
+	 * @return Ritornano i Tweet filtrati Italiani/Tedeschi.
+	 * @throws TweetException Eccezione personalizzata per l'array di tweet se e' vuoto o e' null.
+	 */
+	@PostMapping("/getFilter")
+	public JSONArray getFilters(@RequestBody JSONObject bodyFilter) throws TweetException 
+	{
+		JSONArray arrayTweet = new JSONArray();
+		arrayTweet = DownloadTweet.getTweet(urlTweet);
+		String Lingua = (String) bodyFilter.get("Lang");
+		String Locazione = (String) bodyFilter.get("Location");
+
+		if(Lingua.equals("it") & Locazione.equals("IT"))
+		{
+			FilterIT_IT filterIT_IT = new FilterIT_IT(CountTweet.analisiLinguaTweet(arrayTweet));
+			JSONArray arrayFilterIT_IT = filterIT_IT.filtersTweet(CountTweet.analisiLinguaTweet(arrayTweet), "it", "IT");
+			return arrayFilterIT_IT;
+		}
+		else if(Lingua.equals("it") & Locazione.equals("DE"))
+		{
+			FilterIT_IT filterIT_DE = new FilterIT_IT(CountTweet.analisiLinguaTweet(arrayTweet));
+			JSONArray arrayFilterIT_DE = filterIT_DE.filtersTweet(CountTweet.analisiLinguaTweet(arrayTweet), "it", "DE");
+			return arrayFilterIT_DE;
+		}
+		else if(Lingua.equals("de") & Locazione.equals("IT"))
+		{
+			FilterIT_IT filterDE_IT = new FilterIT_IT(CountTweet.analisiLinguaTweet(arrayTweet));
+			JSONArray arrayFilterDE_IT = filterDE_IT.filtersTweet(CountTweet.analisiLinguaTweet(arrayTweet), "de", "IT");
+			return arrayFilterDE_IT;
+		}
+		else if(Lingua.equals("de") & Locazione.equals("DE"))
+		{
+			FilterIT_IT filterDE_DE = new FilterIT_IT(CountTweet.analisiLinguaTweet(arrayTweet));
+			JSONArray arrayFilterDE_DE = filterDE_DE.filtersTweet(CountTweet.analisiLinguaTweet(arrayTweet), "de", "DE");
+			return arrayFilterDE_DE;
+		}
+		return null;
+	}
+	
 }

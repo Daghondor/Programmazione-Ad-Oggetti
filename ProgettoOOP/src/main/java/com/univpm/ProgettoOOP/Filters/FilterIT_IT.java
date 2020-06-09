@@ -1,20 +1,48 @@
 package com.univpm.ProgettoOOP.Filters;
 
 import org.json.simple.JSONArray;
+import com.univpm.ProgettoOOP.Util.FiltersUtils;
 
 /**
  * Classe che implementa il filtraggio della lingua IT e della locazione IT su i tweet.
  * @author Ricciardi Nicola
  * @author Rendina Michele Pio
  */
-public class FilterIT_IT implements Filter
+public class FilterIT_IT implements Filters<Object, Object>
 {
 	/**
-	 * Metodo che filtra l'array di tweet sulla lingua IT e locazione IT.
+	 * Array contenente i tweet.
 	 */
-	public JSONArray filtroLinguaLocazione(JSONArray arrayTweet)
+	private JSONArray arrayTweet;
+	
+	/**
+	 * Variabile usata per richiamare il metodo presente nella classe FiltersUtils.
+	 */
+	private FiltersUtils utils;
+	
+	/**
+	 * Costruttore della classe FilterIT_IT.
+	 * @param array Array di tweet.
+	 */
+	public FilterIT_IT(JSONArray array)
 	{
-		System.out.println("BELLA");
-		return null;
+		super();
+		this.arrayTweet = array;
+		this.utils = new FiltersUtils();
+	}
+	
+	/**
+	 * Getter dell'array di tweet.
+	 * @return arrayTweet Ritorna l'array di tweet.
+	 */
+	public JSONArray getTweet()
+	{
+		return arrayTweet;
+	}
+	
+	@Override
+	public JSONArray filtersTweet(JSONArray arrayTweet, Object lingua, Object locazione)
+	{
+		return (JSONArray) utils.getTweetFiltered(this.getTweet(), lingua, locazione);
 	}
 }
