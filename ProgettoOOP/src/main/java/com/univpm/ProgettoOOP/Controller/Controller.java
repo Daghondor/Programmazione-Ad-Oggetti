@@ -4,6 +4,8 @@ import org.json.simple.JSONArray;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.univpm.ProgettoOOP.Exception.TweetException;
 import com.univpm.ProgettoOOP.Services.*;
 import com.univpm.ProgettoOOP.Statistics.StatsIT_DE;
 import com.univpm.ProgettoOOP.Util.CountTweet;
@@ -32,9 +34,10 @@ public class Controller
 	 * in base al parametro che l'utente inserisce nell'URL (tipo Lingua o Locazione).
 	 * @param Tipo Parametro che identifica il tipo di analisi effettuata (Lingua o Locazione) su i tweet italiani e tedeschi.
 	 * @return Ritornano i tweet analizzati in base alla tipologia espressa dall'utente nell'URL.
+	 * @throws TweetException Eccezione personalizzata per l'array di tweet se e' vuoto o e' null.
 	 */
 	@GetMapping("/getData")
-	public JSONArray getTweet(@RequestParam(name = "tipo", defaultValue = "lingua") String Tipo)
+	public JSONArray getTweet(@RequestParam(name = "tipo", defaultValue = "lingua") String Tipo) throws TweetException
 	{
 		JSONArray arrayTweet = new JSONArray();
 		arrayTweet = DownloadTweet.getTweet(urlTweet);
@@ -56,9 +59,10 @@ public class Controller
 	 * Le statistiche vengono effettuate sia sulla lingua, sia sulla locazione.
 	 * @param Tipo Parametro che identifica il tipo di statistiche ove deve essere effettuata (su i Tweet Italiani o Tedeschi).
 	 * @return Ritornano le statistiche effettuato o su i Tweet Italiani o Tedeschi.
+	 * @throws TweetException Eccezione personalizzata per l'array di tweet se e' vuoto o e' null.
 	 */
 	@GetMapping("/getStats")
-	public JSONArray getStatsTweetIT(@RequestParam(name = "tipo", defaultValue = "IT") String Tipo)
+	public JSONArray getStatsTweetIT(@RequestParam(name = "tipo", defaultValue = "IT") String Tipo) throws TweetException 
 	{
 		JSONArray arrayTweet = new JSONArray();
 		arrayTweet = DownloadTweet.getTweet(urlTweet);

@@ -11,6 +11,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
+import com.univpm.ProgettoOOP.Exception.*;
 import com.univpm.ProgettoOOP.Model.*;
 import com.univpm.ProgettoOOP.Model.Tweet;
 import com.univpm.ProgettoOOP.Util.*;
@@ -54,7 +55,7 @@ public class DownloadTweet
 	 * @param url URL delle API (proxy) di Twitter.
 	 * @return listaDeiTweet Ritorna al controller la lista dei tweet modellati.
 	 */
-	public static JSONArray getTweet(String url)
+	public static JSONArray getTweet(String url) throws TweetException
 	{
 		arrayCittaIT_DE = prelevaCitta(urlCittaItaliane, urlCittaTedesche);
 		try 
@@ -137,6 +138,7 @@ public class DownloadTweet
 								 							 TestoTweet, LinguaTweet,
 								 							 NomeUtente, ID_utente, 
 								 							 LocationUtente, Posizione);
+						 if(array.isEmpty() | array == null) throw new TweetException();
 					 }
 					 catch(Exception e)
 					 {
