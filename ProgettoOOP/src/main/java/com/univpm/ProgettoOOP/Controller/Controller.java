@@ -40,7 +40,8 @@ public class Controller
 	 * @return Ritornano i tweet analizzati in base alla tipologia espressa dall'utente nell'URL.
 	 * @throws TweetException Eccezione personalizzata per l'array di tweet se e' vuoto o e' null.
 	 */
-	@GetMapping("/getData")
+	@SuppressWarnings("unchecked")
+	@GetMapping("/Data")
 	public JSONArray getData(@RequestParam(name = "tipo", defaultValue = "lingua") String Tipo) throws TweetException
 	{
 		JSONArray arrayTweet = new JSONArray();
@@ -48,11 +49,38 @@ public class Controller
 		
 		if(Tipo.equals("lingua"))
 		{
-			return CountTweet.analisiLinguaTweet(arrayTweet);
+			if(CountTweet.analisiLinguaTweet(arrayTweet).isEmpty() | CountTweet.analisiLinguaTweet(arrayTweet) == null)
+			{
+				JSONObject objVoid = new JSONObject();
+				JSONArray arrayVoid = new JSONArray();
+				objVoid.put("TWEET SU BASE LINGUA", "");
+				objVoid.put("Tweet Italiani", "0");
+				objVoid.put("Tweet Tedeschi", "0");
+				arrayVoid.add(objVoid);
+				return arrayVoid;
+			}
+			else
+			{
+				return CountTweet.analisiLinguaTweet(arrayTweet);
+			}
+
 		}
 		else if(Tipo.equals("location"))
 		{
-			return CountTweet.analisiLocationTweet(arrayTweet);
+			if(CountTweet.analisiLinguaTweet(arrayTweet).isEmpty() | CountTweet.analisiLinguaTweet(arrayTweet) == null)
+			{
+				JSONObject objVoid = new JSONObject();
+				JSONArray arrayVoid = new JSONArray();
+				objVoid.put("TWEET SU BASE LOCAZIONE", "");
+				objVoid.put("Tweet Italiani", "0");
+				objVoid.put("Tweet Tedeschi", "0");
+				arrayVoid.add(objVoid);
+				return arrayVoid;
+			}
+			else
+			{
+				return CountTweet.analisiLocationTweet(arrayTweet);
+			}
 		}
 		return null;
 	}
@@ -65,12 +93,11 @@ public class Controller
 	 * @return Ritornano le statistiche effettuato o su i Tweet Italiani o Tedeschi.
 	 * @throws TweetException Eccezione personalizzata per l'array di tweet se e' vuoto o e' null.
 	 */
-	@GetMapping("/getStats")
+	@GetMapping("/Stats")
 	public JSONArray getStats(@RequestParam(name = "tipo", defaultValue = "IT") String Tipo) throws TweetException 
 	{
 		JSONArray arrayTweet = new JSONArray();
 		arrayTweet = DownloadTweet.getTweet(urlTweet);
-		
 		if(Tipo.equals("IT"))
 		{
 			StatsIT_DE statsIT = new StatsIT_DE(CountTweet.analisiLinguaTweet(arrayTweet));
@@ -94,7 +121,7 @@ public class Controller
 	 * @return Ritornano i Tweet filtrati Italiani/Tedeschi.
 	 * @throws TweetException Eccezione personalizzata per l'array di tweet se e' vuoto o e' null.
 	 */
-	@PostMapping("/getFilter")
+	@PostMapping("/Filter")
 	public JSONArray getFilters(@RequestBody JSONObject bodyFilter) throws TweetException 
 	{
 		JSONArray arrayTweet = new JSONArray();

@@ -10,6 +10,7 @@ public class FiltersUtils
 	 */
 	private static JSONArray tweetFiltered = new JSONArray();
 	
+	@SuppressWarnings("unchecked")
 	public JSONArray getTweetFiltered(JSONArray array, Object lang, Object location)
 	{
 		tweetFiltered.clear();

@@ -88,7 +88,7 @@ public class StatsUtils
 			{
 				percentualeTweetLinguaItaliana = (float) BigDecimal.valueOf((float) (tweetLinguaItaliana * 100) / (float) array.size()).setScale(2, RoundingMode.HALF_UP).doubleValue();
 				percentualeTweetLocazioneItaliana = (float) BigDecimal.valueOf((float) (tweetLocazioneItaliana * 100) / (float) array.size()).setScale(2, RoundingMode.HALF_UP).doubleValue();
-				statsFinale.put("Tweet Filtrati", array.size());
+				statsFinale.put("Tweet Filtrati (IT & DE)", array.size());
 				statsFinale.put("Numero Di Tweet Lingua Italiana", tweetLinguaItaliana);
 				statsFinale.put("Percentuale Tweet Lingua Italiana", percentualeTweetLinguaItaliana + "%");
 				statsFinale.put("Numero Di Tweet Con Locazione Italiana", tweetLocazioneItaliana);
@@ -108,8 +108,8 @@ public class StatsUtils
 			{
 				percentualeTweetLinguaTedesca = (float) BigDecimal.valueOf((float) (tweetLinguaTedesca * 100) / (float) array.size()).setScale(2, RoundingMode.HALF_UP).doubleValue();
 				percentualeTweetLocazioneTedesca = (float) BigDecimal.valueOf((float) (tweetLocazioneTedesca * 100) / (float) array.size()).setScale(2, RoundingMode.HALF_UP).doubleValue();
-				statsFinale.put("Tweet Filtrati", array.size());
-				statsFinale.put("Numero Di Tweet Lingua Tedesca", tweetLinguaTedesca );
+				statsFinale.put("Tweet Filtrati (IT & DE)", array.size());
+				statsFinale.put("Numero Di Tweet Lingua Tedesca", tweetLinguaTedesca);
 				statsFinale.put("Percentuale Tweet Lingua Tedesca", percentualeTweetLinguaTedesca  + "%");
 				statsFinale.put("Numero Di Tweet Con Locazione Tedesca", tweetLocazioneTedesca );
 				statsFinale.put("Percentuale Tweet Con Locazione Tedesca", percentualeTweetLocazioneTedesca  + "%");
@@ -121,6 +121,15 @@ public class StatsUtils
 	    		System.out.println("MESSAGGIO: " + e.getMessage());
 	    		System.out.println("CAUSA: " + e.getCause());
 			}
+		}
+		if(tweetStats == null | tweetStats.isEmpty())
+		{
+			JSONObject arrayVoid = new JSONObject();
+			arrayVoid.put("STATISTICA ABORTITA", "");
+			arrayVoid.put("Tweet Italiani", "0");
+			arrayVoid.put("Tweet Tedeschi", "0");
+			tweetStats.add(arrayVoid);
+			return tweetStats;
 		}
 		return tweetStats;
 	}
