@@ -36,6 +36,15 @@ public class FiltersUtils
 				}
 			}
 		}
+		if(tweetFiltered == null | tweetFiltered.isEmpty())
+		{
+			JSONObject arrayVoid = new JSONObject();
+			arrayVoid.put("FILTRAGGIO ABORTITO", "");
+			arrayVoid.put("Tweet Italiani", "0");
+			arrayVoid.put("Tweet Tedeschi", "0");
+			tweetFiltered.add(arrayVoid);
+			return tweetFiltered;
+		}
 		return tweetFiltered;
 	}
 	
