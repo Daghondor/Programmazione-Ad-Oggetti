@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.univpm.ProgettoOOP.Services.DownloadTweet;
 import com.univpm.ProgettoOOP.Utils.CountTweet;
 
-
 /**
  * Classe per il testing dell'applicazione.
  * @author Ricciardi Nicola
