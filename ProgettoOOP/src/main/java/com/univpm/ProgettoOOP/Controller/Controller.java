@@ -12,7 +12,7 @@ import com.univpm.ProgettoOOP.Exception.TweetException;
 import com.univpm.ProgettoOOP.Filters.FilterIT_IT;
 import com.univpm.ProgettoOOP.Services.*;
 import com.univpm.ProgettoOOP.Statistics.StatsIT_DE;
-import com.univpm.ProgettoOOP.Util.CountTweet;
+import com.univpm.ProgettoOOP.Utils.CountTweet;
 
 /**
  * Rappresenta la classe che gestisce tutte le chiamate al Server 

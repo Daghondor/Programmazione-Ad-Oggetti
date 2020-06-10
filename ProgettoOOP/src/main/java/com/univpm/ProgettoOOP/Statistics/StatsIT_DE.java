@@ -1,7 +1,8 @@
 package com.univpm.ProgettoOOP.Statistics;
 
 import org.json.simple.JSONArray;
-import com.univpm.ProgettoOOP.Util.*;
+
+import com.univpm.ProgettoOOP.Utils.*;
 
 /**
  * Classe che implementa l'interfaccia delle statistiche e ne effettua l'override.

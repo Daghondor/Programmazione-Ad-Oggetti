@@ -10,7 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import com.univpm.ProgettoOOP.Services.DownloadTweet;
-import com.univpm.ProgettoOOP.Util.CountTweet;
+import com.univpm.ProgettoOOP.Utils.CountTweet;
 
 
 /**

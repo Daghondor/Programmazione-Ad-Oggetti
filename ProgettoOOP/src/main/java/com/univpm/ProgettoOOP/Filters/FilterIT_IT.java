@@ -1,7 +1,8 @@
 package com.univpm.ProgettoOOP.Filters;
 
 import org.json.simple.JSONArray;
-import com.univpm.ProgettoOOP.Util.FiltersUtils;
+
+import com.univpm.ProgettoOOP.Utils.FiltersUtils;
 
 /**
  * Classe che implementa il filtraggio della lingua IT e della locazione IT su i tweet.

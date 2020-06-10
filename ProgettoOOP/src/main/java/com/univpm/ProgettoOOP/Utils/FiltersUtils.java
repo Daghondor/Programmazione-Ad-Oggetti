@@ -1,4 +1,4 @@
-package com.univpm.ProgettoOOP.Util;
+package com.univpm.ProgettoOOP.Utils;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

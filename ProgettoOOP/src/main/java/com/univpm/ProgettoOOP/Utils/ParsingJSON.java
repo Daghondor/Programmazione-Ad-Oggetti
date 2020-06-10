@@ -1,4 +1,4 @@
-package com.univpm.ProgettoOOP.Util;
+package com.univpm.ProgettoOOP.Utils;
 
 import java.util.ArrayList;
 import com.google.gson.Gson;

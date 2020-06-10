@@ -14,7 +14,7 @@ import org.json.simple.parser.ParseException;
 import com.univpm.ProgettoOOP.Exception.*;
 import com.univpm.ProgettoOOP.Model.*;
 import com.univpm.ProgettoOOP.Model.Tweet;
-import com.univpm.ProgettoOOP.Util.*;
+import com.univpm.ProgettoOOP.Utils.*;
 
 /**
  * Classe per il download dei tweet modellati.
