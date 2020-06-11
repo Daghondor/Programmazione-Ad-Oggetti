@@ -67,7 +67,7 @@ public class Controller
 		}
 		else if(Tipo.equals("location"))
 		{
-			if(CountTweet.analisiLinguaTweet(arrayTweet).isEmpty() | CountTweet.analisiLinguaTweet(arrayTweet) == null)
+			if(CountTweet.analisiLocationTweet(arrayTweet).isEmpty() | CountTweet.analisiLocationTweet(arrayTweet) == null)
 			{
 				JSONObject objVoid = new JSONObject();
 				JSONArray arrayVoid = new JSONArray();
