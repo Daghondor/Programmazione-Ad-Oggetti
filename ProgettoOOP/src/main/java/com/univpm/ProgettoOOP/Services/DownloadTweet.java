@@ -58,6 +58,16 @@ public class DownloadTweet
 	 */
 	public static JSONArray getTweet(String url) throws TweetException
 	{
+		try
+		{
+			arrayCittaIT_DE.clear();
+		}
+		catch(NullPointerException e)
+		{
+			 System.out.println("ERRORE. PROBLEAMI NELLA CREAZIONE DELL'ARRAY CITTA'.");
+			 System.out.println("MESSAGGIO: " + e.getMessage());
+			 System.out.println("CAUSA: " + e.getCause());
+		}
 		arrayCittaIT_DE = prelevaCitta(urlCittaItaliane, urlCittaTedesche);
 		try 
 		{

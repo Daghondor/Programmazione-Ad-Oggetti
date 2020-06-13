@@ -76,11 +76,42 @@
 		 la directory dei file sorgente, la configurazione dei vari plug-in, e altro ancora… -->
 	<build>
 		<plugins>
+		
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.1</version><!--$NO-MVN-MAN-VER$-->
+			</plugin>
+			
+			<!-- Plug-in per generare l'eseguibile del codice -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<archive>
+								<!-- Specifico la classe di partenza, ovvero il main. -->
+								<manifest>
+									<mainClass>com.univpm.ProgettoOOP.ProgettoOopApplication </mainClass>
+								</manifest>
+							</archive>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		
 		</plugins>
 	</build>
-
 </project>
