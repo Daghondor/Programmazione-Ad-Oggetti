@@ -12,16 +12,19 @@ L'applicazione può essere usata in due modi:
 - Scaricare il codice sorgente;
 - Aprirlo su un IDE preferito (consigliamo Eclipse);
 - Cliccare il tasto destro del mouse sul progetto;
-- Scegliere la voce Run Us ---> Maven build;
+- Scegliere la voce Run Us ---> Maven buil (come da immagine);
+![IDE](https://user-images.githubusercontent.com/48152637/84568764-f15cd200-ad81-11ea-9718-e0b5063bb54a.png)
+
 - Nella voce Goals, scrivere 'package' (come in figura);
 ![MavenBuild](https://user-images.githubusercontent.com/48152637/84567818-7a243f80-ad7b-11ea-81c5-3d93e9262588.png)
 
 - Infine premere su Run.
+
 Dopo di ciò partirà la generazione del codice eseguibile, attendere qualche secondo (al massimo 3 minuti).
 Se tutto è andato bene, apparirà la scritta 'Build Success' (come in figura), quindi si potrà usare il file eseguibile jar.
 ![Build Success Maven](https://user-images.githubusercontent.com/48152637/84567972-a55b5e80-ad7c-11ea-93d1-cd249d8d728f.png)
 
-Per iniziare ad usare l'applicazione tramite il pacchetto distribuibile .jar, bisogna posizionarsi nella cartella Target presente dentro la root dell'applicazione (ovvero la cartella dove è stato scaricato il codice sorgente da GitHub, oppure dove è stata spostata).
+Per iniziare ad usare l'applicazione tramite il pacchetto distribuibile .jar, bisogna posizionarsi nella root dell'applicazione (ovvero la cartella dove è stato scaricato il codice sorgente da GitHub, oppure dove è stata spostata).
 
 Per lanciare l'applicazione bisogna:
 
@@ -29,10 +32,9 @@ Per lanciare l'applicazione bisogna:
 2) Posizionarsi sulla root dell'applicazione (..\..\ProgettoOOP) (come da immagine);
 ![CMD1](https://user-images.githubusercontent.com/48152637/84568427-b9548f80-ad7f-11ea-8d7f-618d3615a75a.png)
 
-3) Verificare che la cartella Target sia presente e riempita (con le classi), tramite il comando 'dir' (CMD Windows); inoltre si potrà vedere anche dall'ambiente IDE che la cartella è piena (come da immagini);
+3) Verificare che la cartella Target sia presente e riempita (con le classi) prima di generare l'eseguibile, tramite il comando 'dir' (CMD Windows); inoltre si potrà vedere anche dall'ambiente IDE che la cartella è piena (come da immagini);
 ![CMD4](https://user-images.githubusercontent.com/48152637/84568461-ef920f00-ad7f-11ea-977e-8172d42b2899.png)
 ![Cartella Target](https://user-images.githubusercontent.com/48152637/84568552-72b36500-ad80-11ea-992e-7f5d73f78acf.png)
-
 
 4) Lanciare il comando java -jar target/ProgettoOOP-0.0.1-SNAPSHOT.jar, e se tutto va bene partirà l'applicazione SpringBoot (come da immagine);
 ![CMD3](https://user-images.githubusercontent.com/48152637/84568537-544d6980-ad80-11ea-87e3-70e5a74b022c.png)
