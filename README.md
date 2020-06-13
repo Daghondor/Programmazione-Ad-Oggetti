@@ -48,7 +48,7 @@ Per lanciare l'applicazione bisogna:
 - Scegliere la voce Run Us ---> SpringBoot Application (come da immagine);
 ![IDE1](https://user-images.githubusercontent.com/48152637/84568695-7bf10180-ad81-11ea-8222-26f8690fc485.png)
 
-Una volta avviato il servizio, se tutto va bene, si potrà vedere nella console del prompt di comandi che è stato avviato un servizio Tomcat in ascolto sulla posta 8080, ed è stato insterito sull'applicazione un Tomcat di tipo Embedded, quindi un Web Server.
+- Una volta avviato il servizio, se tutto va bene, si potrà vedere nella console del prompt di comandi che è stato avviato un servizio Tomcat in ascolto sulla posta 8080, ed è stato insterito sull'applicazione un Tomcat di tipo Embedded, quindi un Web Server.
 Come da immagine:
 ![Tomcat Started](https://user-images.githubusercontent.com/48152637/84364271-288b8180-abd0-11ea-9d78-647d051bae82.png)
 
@@ -80,7 +80,13 @@ Ecco degli esempi di chiamate effettuate con Postman,con i rispettivi risultati:
 Per eseguire la richiesta GET o POST si deve necessariamente installare un programma di API Testing; consigliamo Postman.
 
 La seguente tabella mostra le rotte che l'applicazione gestisce:
-![Rotte Progetto OOP](https://user-images.githubusercontent.com/48152637/84304568-fdb21680-ab58-11ea-8756-ce8ad3ec7744.png)
+Tipo | Rotta | Descrizione
+---- | ---- | ----
+GET | /Data?tipo=lingua | Effettua l'analisi su un gruppo di Tweet Italiani e Tedeschi in base alla lingua.
+GET | /Data?tipo=location | Effettua l'analisi su un gruppo di Tweet Italiani e Tedeschi in base alla locazione.
+GET | /Stats?tipo=IT | Effettua le statistiche (lingua e locazione) su un gruppo di Tweet Italiani.
+GET | /Stats?tipo=DE | Effettua le statistiche (lingua e locazione) su un gruppo di Tweet Tedeschi.
+POST | /Filter | Effettua il filtraggio dei Tweet rispettando le condizioni specificate nel body della richiesta.
 
 Nella rotte vi è un parametro chiamato "tipo" che identifica la tipologia di analsi ove si vuole effettuare:
 1) Sezione /Data
