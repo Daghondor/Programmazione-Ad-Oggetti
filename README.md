@@ -416,6 +416,5 @@ Infine il Controller restiuirà il risultato della chiamata API all'applicazione
 ![(FILTER_DE-DE)Diagramma Delle Sequenze](https://user-images.githubusercontent.com/48152637/84388115-52ef3600-abf4-11ea-93d5-c7eb424f2f50.png)
 
 # Autori
-https://github.com/MicheleRendina
 - [Nicola Ricciardi](https://github.com/Nicola-Ricciardi) - Contributo 50%
 - [Michele Pio Rendina](https://github.com/MicheleRendina) - Contributo 50%
