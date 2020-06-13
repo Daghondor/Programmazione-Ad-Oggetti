@@ -99,10 +99,13 @@
 						</goals>
 						<configuration>
 							<archive>
-								<!-- Specifico la classe di partenza, ovvero il main. -->
+							
+								<!-- Nel Manifest specifico la classe di partenza del codice eseguibile, 
+									ovvero il main. -->
 								<manifest>
 									<mainClass>com.univpm.ProgettoOOP.ProgettoOopApplication </mainClass>
 								</manifest>
+								
 							</archive>
 							<descriptorRefs>
 								<descriptorRef>jar-with-dependencies</descriptorRef>
